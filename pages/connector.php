@@ -6,4 +6,3 @@ $dbPassword = "";
 $dbName = "food4kids";
 
 $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
-?>
