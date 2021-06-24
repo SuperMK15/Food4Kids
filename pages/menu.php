@@ -1,5 +1,5 @@
 <?php
-    include_once 'connector.php';
+include_once 'connector.php';
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +12,7 @@
   <title>Menu Display - Food4Kids Waterloo</title>
   <link rel="shortcut icon" type="image/jpg" href="../images/favicon.png">
 
-  <link href="../styles/theme.css" rel="stylesheet" type="text/css"/>
+  <link href="../styles/theme.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -35,109 +35,109 @@
       <h1>Menu Display</h1>
       <div class="flex">
         <table class="finalMenu">
-        <tr>
-          <td>NO RESTRICTIONS MENU</td>
-        </tr>
-        <?php
-            $text = "SELECT * FROM menus WHERE basketID = 1";
-            $query = mysqli_query($conn, $text);
-            $menuResult = mysqli_fetch_assoc($query);
-            for ($x = 1; $x <= 25; $x++) {
-              $textI = "SELECT * FROM items WHERE itemID =" . $menuResult['itemID' . $x];
-              $queryI = mysqli_query($conn, $textI);
-              if (mysqli_num_rows($queryI) != 0) {
-                $itemResult = mysqli_fetch_assoc($queryI);
-                echo "<tr>";
-                  echo "<td class='BLUE'>" . $itemResult['identifier'] . "</td>";
-                echo "</tr>";
-              }
+          <tr>
+            <td>NO RESTRICTIONS MENU</td>
+          </tr>
+          <?php
+          $text = "SELECT * FROM menus WHERE basketID = 1";
+          $query = mysqli_query($conn, $text);
+          $menuResult = mysqli_fetch_assoc($query);
+          for ($x = 1; $x <= 25; $x++) {
+            $textI = "SELECT * FROM items WHERE itemID =" . $menuResult['itemID' . $x];
+            $queryI = mysqli_query($conn, $textI);
+            if (mysqli_num_rows($queryI) != 0) {
+              $itemResult = mysqli_fetch_assoc($queryI);
+              echo "<tr>";
+              echo "<td class='BLUE'>" . $itemResult['identifier'] . "</td>";
+              echo "</tr>";
             }
+          }
           ?>
         </table>
         <table class="finalMenu">
-        <tr>
-          <td>HALAL MENU</td>
-        </tr>
+          <tr>
+            <td>HALAL MENU</td>
+          </tr>
           <?php
-            $text = "SELECT * FROM menus WHERE basketID = 2";
-            $query = mysqli_query($conn, $text);
-            $menuResult = mysqli_fetch_assoc($query);
-            for ($x = 1; $x <= 25; $x++) {
-              $textI = "SELECT * FROM items WHERE itemID =" . $menuResult['itemID' . $x];
-              $queryI = mysqli_query($conn, $textI);
-              if (mysqli_num_rows($queryI) != 0) {
-                $itemResult = mysqli_fetch_assoc($queryI);
-                echo "<tr>";
-                  echo "<td class='RED'>" . $itemResult['identifier'] . "</td>";
-                echo "</tr>";
-              }
+          $text = "SELECT * FROM menus WHERE basketID = 2";
+          $query = mysqli_query($conn, $text);
+          $menuResult = mysqli_fetch_assoc($query);
+          for ($x = 1; $x <= 25; $x++) {
+            $textI = "SELECT * FROM items WHERE itemID =" . $menuResult['itemID' . $x];
+            $queryI = mysqli_query($conn, $textI);
+            if (mysqli_num_rows($queryI) != 0) {
+              $itemResult = mysqli_fetch_assoc($queryI);
+              echo "<tr>";
+              echo "<td class='RED'>" . $itemResult['identifier'] . "</td>";
+              echo "</tr>";
             }
+          }
           ?>
         </table>
         <table class="finalMenu">
-        <tr>
-          <td>VEGETARIAN MENU</td>
-        </tr>
+          <tr>
+            <td>VEGETARIAN MENU</td>
+          </tr>
           <?php
-            $text = "SELECT * FROM menus WHERE basketID = 3";
-            $query = mysqli_query($conn, $text);
-            $menuResult = mysqli_fetch_assoc($query);
-            for ($x = 1; $x <= 25; $x++) {
-              $textI = "SELECT * FROM items WHERE itemID =" . $menuResult['itemID' . $x];
-              $queryI = mysqli_query($conn, $textI);
-              if (mysqli_num_rows($queryI) != 0) {
-                $itemResult = mysqli_fetch_assoc($queryI);
-                echo "<tr>";
-                  echo "<td class='GREEN'>" . $itemResult['identifier'] . "</td>";
-                echo "</tr>";
-              }
+          $text = "SELECT * FROM menus WHERE basketID = 3";
+          $query = mysqli_query($conn, $text);
+          $menuResult = mysqli_fetch_assoc($query);
+          for ($x = 1; $x <= 25; $x++) {
+            $textI = "SELECT * FROM items WHERE itemID =" . $menuResult['itemID' . $x];
+            $queryI = mysqli_query($conn, $textI);
+            if (mysqli_num_rows($queryI) != 0) {
+              $itemResult = mysqli_fetch_assoc($queryI);
+              echo "<tr>";
+              echo "<td class='GREEN'>" . $itemResult['identifier'] . "</td>";
+              echo "</tr>";
             }
-            ?>
+          }
+          ?>
         </table>
         <table class="finalMenu">
-        <tr>
-          <td>BABY MENU</td>
-        </tr>
+          <tr>
+            <td>BABY MENU</td>
+          </tr>
           <?php
-            $text = "SELECT * FROM menus WHERE basketID = 4";
-            $query = mysqli_query($conn, $text);
-            $menuResult = mysqli_fetch_assoc($query);
-            for ($x = 1; $x <= 25; $x++) {
-              $textI = "SELECT * FROM items WHERE itemID =" . $menuResult['itemID' . $x];
-              $queryI = mysqli_query($conn, $textI);
-              if (mysqli_num_rows($queryI) != 0) {
-                $itemResult = mysqli_fetch_assoc($queryI);
-                echo "<tr>";
-                  echo "<td class='YELLOW'>" . $itemResult['identifier'] . "</td>";
-                echo "</tr>";
-              }
+          $text = "SELECT * FROM menus WHERE basketID = 4";
+          $query = mysqli_query($conn, $text);
+          $menuResult = mysqli_fetch_assoc($query);
+          for ($x = 1; $x <= 25; $x++) {
+            $textI = "SELECT * FROM items WHERE itemID =" . $menuResult['itemID' . $x];
+            $queryI = mysqli_query($conn, $textI);
+            if (mysqli_num_rows($queryI) != 0) {
+              $itemResult = mysqli_fetch_assoc($queryI);
+              echo "<tr>";
+              echo "<td class='YELLOW'>" . $itemResult['identifier'] . "</td>";
+              echo "</tr>";
             }
-            ?>
+          }
+          ?>
         </table>
         <table class="finalMenu">
-        <tr>
-          <td>OTHER MENU</td>
-        </tr>
-        <?php
-            $text = "SELECT * FROM menus WHERE basketID = 5";
-            $query = mysqli_query($conn, $text);
-            $menuResult = mysqli_fetch_assoc($query);
-            for ($x = 1; $x <= 25; $x++) {
-              $textI = "SELECT * FROM items WHERE itemID =" . $menuResult['itemID' . $x];
-              $queryI = mysqli_query($conn, $textI);
-              if (mysqli_num_rows($queryI) != 0) {
-                $itemResult = mysqli_fetch_assoc($queryI);
-                echo "<tr>";
-                  echo "<td class='BROWN'>" . $itemResult['identifier'] . "</td>";
-                echo "</tr>";
-              }
+          <tr>
+            <td>OTHER MENU</td>
+          </tr>
+          <?php
+          $text = "SELECT * FROM menus WHERE basketID = 5";
+          $query = mysqli_query($conn, $text);
+          $menuResult = mysqli_fetch_assoc($query);
+          for ($x = 1; $x <= 25; $x++) {
+            $textI = "SELECT * FROM items WHERE itemID =" . $menuResult['itemID' . $x];
+            $queryI = mysqli_query($conn, $textI);
+            if (mysqli_num_rows($queryI) != 0) {
+              $itemResult = mysqli_fetch_assoc($queryI);
+              echo "<tr>";
+              echo "<td class='BROWN'>" . $itemResult['identifier'] . "</td>";
+              echo "</tr>";
             }
-            ?>
+          }
+          ?>
         </table>
       </div>
     </div>
   </main>
-            
+
   <footer>
     <div class="social">
       <a href="https://www.instagram.com/food4kidswaterlooregion/"><img src="https://cdn2.iconfinder.com/data/icons/social-media-applications/64/social_media_applications_3-instagram-128.png"></a>
