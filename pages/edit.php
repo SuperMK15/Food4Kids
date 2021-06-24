@@ -1,9 +1,9 @@
 <?php
-    include_once 'connector.php';
-    if (isset($_POST['edit'])) {
-        $editSelect = "SELECT * FROM items WHERE identifier='" . $_POST['hiddenText'] . "'";
-        $editQuery = mysqli_query($conn, $editSelect);
-    }
+include_once 'connector.php';
+if (isset($_POST['edit'])) {
+  $editSelect = "SELECT * FROM items WHERE identifier='" . $_POST['hiddenText'] . "'";
+  $editQuery = mysqli_query($conn, $editSelect);
+}
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +16,7 @@
   <title>Item Editor - Food4Kids Organizer - Waterloo Region</title>
   <link rel="shortcut icon" type="image/jpg" href="../images/favicon.png">
 
-  <link href="../styles/theme.css" rel="stylesheet" type="text/css"/>
+  <link href="../styles/theme.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -60,23 +60,23 @@
               <tr>
                 <?php
                 if (mysqli_num_rows($editQuery) != 0) {
-                    $counter = 0;
-                    while ($editRow = mysqli_fetch_assoc($editQuery)) {
-                      echo '<td><input type="text" id="nutrition" name="updateIdentifier" value="' . $editRow['identifier'] . '"></td>';
-                      echo '<td><input type="text" id="nutrition" name="calories" value="' . $editRow['calories'] . '"></td>';
-                      echo '<td><input type="text" id="nutrition" name="protein" value="' . $editRow['protein'] . '"></td>';
-                      echo '<td><input type="text" id="nutrition" name="calcium" value="' . $editRow['calcium'] . '"></td>';
-                      echo '<td><input type="text" id="nutrition" name="iron" value="' . $editRow['iron'] . '"></td>';
-                      echo '<td><input type="text" id="nutrition" name="vitamina" value="' . $editRow['vitaminA'] . '"></td>';
-                      echo '<td><input type="text" id="nutrition" name="vitaminc" value="' . $editRow['vitaminC'] . '"></td>';
-                      echo '<td><input type="text" id="nutrition" name="carbs" value="' . $editRow['carbohydrates'] . '"></td>';
-                      echo '<td><input type="text" id="nutrition" name="sodium" value="' . $editRow['sodium'] . '"></td>';
-                      echo '<td><input type="text" id="nutrition" name="sugar" value="' . $editRow['sugar'] . '"></td>';
-                      echo '<td><input type="text" id="nutrition" name="fat" value="' . $editRow['fat'] . '"></td>';
-                      echo '<td><input type="text" id="nutrition" name="stock" value="' . $editRow['stock'] . '"></td>';
-                      echo '<td><input type="text" id="nutrition" name="cost" value="' . $editRow['price'] . '"></td>';
-                      echo '<input type="hidden" id="nutrition" name="itemID" value=' . $editRow['itemID'] . '>';
-                    }
+                  $counter = 0;
+                  while ($editRow = mysqli_fetch_assoc($editQuery)) {
+                    echo '<td><input type="text" id="nutrition" name="updateIdentifier" value="' . $editRow['identifier'] . '"></td>';
+                    echo '<td><input type="text" id="nutrition" name="calories" value="' . $editRow['calories'] . '"></td>';
+                    echo '<td><input type="text" id="nutrition" name="protein" value="' . $editRow['protein'] . '"></td>';
+                    echo '<td><input type="text" id="nutrition" name="calcium" value="' . $editRow['calcium'] . '"></td>';
+                    echo '<td><input type="text" id="nutrition" name="iron" value="' . $editRow['iron'] . '"></td>';
+                    echo '<td><input type="text" id="nutrition" name="vitamina" value="' . $editRow['vitaminA'] . '"></td>';
+                    echo '<td><input type="text" id="nutrition" name="vitaminc" value="' . $editRow['vitaminC'] . '"></td>';
+                    echo '<td><input type="text" id="nutrition" name="carbs" value="' . $editRow['carbohydrates'] . '"></td>';
+                    echo '<td><input type="text" id="nutrition" name="sodium" value="' . $editRow['sodium'] . '"></td>';
+                    echo '<td><input type="text" id="nutrition" name="sugar" value="' . $editRow['sugar'] . '"></td>';
+                    echo '<td><input type="text" id="nutrition" name="fat" value="' . $editRow['fat'] . '"></td>';
+                    echo '<td><input type="text" id="nutrition" name="stock" value="' . $editRow['stock'] . '"></td>';
+                    echo '<td><input type="text" id="nutrition" name="cost" value="' . $editRow['price'] . '"></td>';
+                    echo '<input type="hidden" id="nutrition" name="itemID" value=' . $editRow['itemID'] . '>';
+                  }
                 }
                 ?>
               </tr>
@@ -84,39 +84,35 @@
           </div>
         </div>
         <section class="attribute-type">
-        <?php
-        $editSelect = "SELECT * FROM items WHERE identifier='" . $_POST['hiddenText'] . "'";
-        $editQuery = mysqli_query($conn, $editSelect);
-        $editRow = mysqli_fetch_assoc($editQuery);
+          <?php
+          $editSelect = "SELECT * FROM items WHERE identifier='" . $_POST['hiddenText'] . "'";
+          $editQuery = mysqli_query($conn, $editSelect);
+          $editRow = mysqli_fetch_assoc($editQuery);
           if ($editRow['containsNuts'] == 1) {
             echo '<input type="checkbox" name="nut-free" id="nut-free" checked>';
             echo '<label for="nut-free"> Nut-Free </label>';
-          }
-          else {
+          } else {
             echo '<input type="checkbox" name="nut-free" id="nut-free">';
             echo '<label for="nut-free"> Nut-Free </label>';
           }
           if ($editRow['isVegetarian'] == 1) {
             echo '<input type="checkbox" name="vegetarian" id="vegetarian" checked>';
             echo '<label for="vegetarian"> Vegetarian </label>';
-          }
-          else {
+          } else {
             echo '<input type="checkbox" name="vegetarian" id="vegetarian">';
             echo '<label for="vegetarian"> Vegetarian </label>';
           }
           if ($editRow['isHalal'] == 1) {
             echo '<input type="checkbox" name="halal" id="halal" checked>';
             echo '<label for="halal"> Halal </label>';
-          }
-          else {
+          } else {
             echo '<input type="checkbox" name="halal" id="halal">';
             echo '<label for="halal"> Halal </label>';
           }
           if ($editRow['isBaby'] == 1) {
             echo '<input type="checkbox" name="baby" id="Baby" checked>';
             echo '<label for="Baby"> Baby </label>';
-          }
-          else {
+          } else {
             echo '<input type="checkbox" name="baby" id="Baby">';
             echo '<label for="Baby"> Baby </label>';
           }
@@ -127,9 +123,8 @@
         </section>
       </form>
       <?php
-        if (isset($_POST['editSubmit'])) {
-
-        }
+      if (isset($_POST['editSubmit'])) {
+      }
       ?>
     </div>
   </main>
