@@ -1,5 +1,5 @@
 <?php
-    include_once 'connector.php';
+include_once 'connector.php';
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +12,7 @@
   <title>Item Editor - Food4Kids Organizer - Waterloo Region</title>
   <link rel="shortcut icon" type="image/jpg" href="../images/favicon.png">
 
-  <link href="../styles/theme.css" rel="stylesheet" type="text/css"/>
+  <link href="../styles/theme.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -84,26 +84,26 @@
         <section class="submission2">
           <input type="submit" value="Update" class="button" id="update" name="update">
           <?php
-            if (isset($_POST['update'])) {
-              $isNutFree = 0;
-              $isVeg = 0;
-              $isHalal = 0;
-              $isBaby = 0;
-              if (isset($_POST['nut-free'])) {
-                $isNutFree = 1;
-              }
-              if (isset($_POST['halal'])) {
-                $isHalal = 1;
-              }
-              if (isset($_POST['vegetarian'])) {
-                $isVeg = 1;
-              }
-              if (isset($_POST['baby'])) {
-                $isBaby = 1;
-              }
-              $addTo = "INSERT INTO items (identifier, calories, protein, calcium, iron, vitaminA, vitaminC, carbohydrates, sodium, sugar, fat, containsNuts, isVegetarian, isHalal, isBaby, price, stock) VALUES ('" . $_POST['identifier'] . "', " . $_POST['calories'] . ", " . $_POST['protein'] . ", " . $_POST['calcium'] . ", " . $_POST['iron'] . ", " . $_POST['vitamina'] . ", " . $_POST['vitaminc'] . ", " . $_POST['carbs'] .", " . $_POST['sodium'] . ", " . $_POST['sugar'] . ", " . $_POST['fat'] . ", $isNutFree, $isVeg, $isHalal, $isBaby, " . $_POST['cost'] . ", ". $_POST['stock'] . ")";
-              $result = mysqli_query($conn, $addTo);
+          if (isset($_POST['update'])) {
+            $isNutFree = 0;
+            $isVeg = 0;
+            $isHalal = 0;
+            $isBaby = 0;
+            if (isset($_POST['nut-free'])) {
+              $isNutFree = 1;
             }
+            if (isset($_POST['halal'])) {
+              $isHalal = 1;
+            }
+            if (isset($_POST['vegetarian'])) {
+              $isVeg = 1;
+            }
+            if (isset($_POST['baby'])) {
+              $isBaby = 1;
+            }
+            $addTo = "INSERT INTO items (identifier, calories, protein, calcium, iron, vitaminA, vitaminC, carbohydrates, sodium, sugar, fat, containsNuts, isVegetarian, isHalal, isBaby, price, stock) VALUES ('" . $_POST['identifier'] . "', " . $_POST['calories'] . ", " . $_POST['protein'] . ", " . $_POST['calcium'] . ", " . $_POST['iron'] . ", " . $_POST['vitamina'] . ", " . $_POST['vitaminc'] . ", " . $_POST['carbs'] . ", " . $_POST['sodium'] . ", " . $_POST['sugar'] . ", " . $_POST['fat'] . ", $isNutFree, $isVeg, $isHalal, $isBaby, " . $_POST['cost'] . ", " . $_POST['stock'] . ")";
+            $result = mysqli_query($conn, $addTo);
+          }
           ?>
         </section>
       </form>
