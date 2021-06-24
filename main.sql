@@ -1,6 +1,3 @@
-.header on
-.mode column
-
 CREATE TABLE Items (
 
   itemID INT AUTO_INCREMENT,
