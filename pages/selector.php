@@ -1,48 +1,48 @@
 <?php
-    include_once 'connector.php';
-    if (isset($_POST['foodSearch'])) {
-      $sql = "SELECT * FROM items WHERE identifier LIKE '%" . $_POST['foodSearch'] . "%'";
-    }
-    if (isset($_POST['delete'])) {
-      $deleteSql = "DELETE FROM items WHERE identifier='" . $_POST['hiddenText'] . "'";
-      $deleteResult = mysqli_query($conn, $deleteSql);
-    }
-    if (isset($_POST['editSubmit'])) {
-      $uIdentifier = $_POST['updateIdentifier'];
-      $ucalories = $_POST['calories'];
-      $uprotein = $_POST['protein'];
-      $ucalcium = $_POST['calcium'];
-      $uiron = $_POST['iron'];
-      $uvitaminA = $_POST['vitamina'];
-      $uvitaminC = $_POST['vitaminc'];
-      $ucarbohydrates = $_POST['carbs'];
-      $usodium = $_POST['sodium'];
-      $usugar = $_POST['sugar'];
-      $ufat = $_POST['fat'];
-      $ucalories = $_POST['calories'];
-      $ustock = $_POST['stock'];
-      $ucost = $_POST['cost'];
-      $uID = $_POST['itemID'];
+include_once 'connector.php';
+if (isset($_POST['foodSearch'])) {
+  $sql = "SELECT * FROM items WHERE identifier LIKE '%" . $_POST['foodSearch'] . "%'";
+}
+if (isset($_POST['delete'])) {
+  $deleteSql = "DELETE FROM items WHERE identifier='" . $_POST['hiddenText'] . "'";
+  $deleteResult = mysqli_query($conn, $deleteSql);
+}
+if (isset($_POST['editSubmit'])) {
+  $uIdentifier = $_POST['updateIdentifier'];
+  $ucalories = $_POST['calories'];
+  $uprotein = $_POST['protein'];
+  $ucalcium = $_POST['calcium'];
+  $uiron = $_POST['iron'];
+  $uvitaminA = $_POST['vitamina'];
+  $uvitaminC = $_POST['vitaminc'];
+  $ucarbohydrates = $_POST['carbs'];
+  $usodium = $_POST['sodium'];
+  $usugar = $_POST['sugar'];
+  $ufat = $_POST['fat'];
+  $ucalories = $_POST['calories'];
+  $ustock = $_POST['stock'];
+  $ucost = $_POST['cost'];
+  $uID = $_POST['itemID'];
 
-      $isNutFree = 0;
-      $isVeg = 0;
-      $isHalal = 0;
-      $isBaby = 0;
-      if (isset($_POST['nut-free'])) {
-        $isNutFree = 1;
-      }
-      if (isset($_POST['halal'])) {
-        $isHalal = 1;
-      }
-      if (isset($_POST['vegetarian'])) {
-        $isVeg = 1;
-      }
-      if (isset($_POST['baby'])) {
-        $isBaby = 1;
-      }
-      $updateSelect = "UPDATE items SET identifier='$uIdentifier', calories=$ucalories, protein=$uprotein, calcium=$ucalcium, iron=$uiron, vitaminA=$uvitaminA, vitaminC=$uvitaminC, sodium=$usodium, sugar=$usugar, fat=$ufat, calories=$ucalories, stock=$ustock, price=$ucost, containsNuts=$isNutFree, isVegetarian=$isVeg, isHalal=$isHalal, isBaby=$isBaby WHERE itemID = $uID";
-      $updateQuery = mysqli_query($conn, $updateSelect);
+  $isNutFree = 0;
+  $isVeg = 0;
+  $isHalal = 0;
+  $isBaby = 0;
+  if (isset($_POST['nut-free'])) {
+    $isNutFree = 1;
   }
+  if (isset($_POST['halal'])) {
+    $isHalal = 1;
+  }
+  if (isset($_POST['vegetarian'])) {
+    $isVeg = 1;
+  }
+  if (isset($_POST['baby'])) {
+    $isBaby = 1;
+  }
+  $updateSelect = "UPDATE items SET identifier='$uIdentifier', calories=$ucalories, protein=$uprotein, calcium=$ucalcium, iron=$uiron, vitaminA=$uvitaminA, vitaminC=$uvitaminC, sodium=$usodium, sugar=$usugar, fat=$ufat, calories=$ucalories, stock=$ustock, price=$ucost, containsNuts=$isNutFree, isVegetarian=$isVeg, isHalal=$isHalal, isBaby=$isBaby WHERE itemID = $uID";
+  $updateQuery = mysqli_query($conn, $updateSelect);
+}
 ?>
 
 <!DOCTYPE html>
@@ -55,7 +55,7 @@
   <title>Item Editor - Food4Kids Organizer - Waterloo Region</title>
   <link rel="shortcut icon" type="image/jpg" href="../images/favicon.png">
 
-  <link href="../styles/theme.css" rel="stylesheet" type="text/css"/>
+  <link href="../styles/theme.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -78,77 +78,76 @@
       <div class="data1">
         <h1>Item Editor</h1>
         <div class="flex">
-            <form method="post" action="../pages/dbEditor.php">
-                <section class="submission-addNew">
-                  <input type="submit" value="Add New" class="button" action="../pages/dbEditor.php">
-                </section>
-            </form>
-            <form method="post" action="">
-              <div class="search-bar">
-                <input list="foods" id="foodSearch" name="foodSearch" placeholder="Search here">
-              </div>
-            </form>
+          <form method="post" action="../pages/dbEditor.php">
+            <section class="submission-addNew">
+              <input type="submit" value="Add New" class="button" action="../pages/dbEditor.php">
+            </section>
+          </form>
+          <form method="post" action="">
+            <div class="search-bar">
+              <input list="foods" id="foodSearch" name="foodSearch" placeholder="Search here">
+            </div>
+          </form>
         </div>
         <div class="flex">
           <table class="searching">
-          <?php
-              if (!isset($_POST['foodSearch'])) {
-                $sqlAll = "SELECT * FROM items";
-                $sqlQuery = mysqli_query($conn, $sqlAll);
-                while ($row = mysqli_fetch_assoc($sqlQuery)) {
+            <?php
+            if (!isset($_POST['foodSearch'])) {
+              $sqlAll = "SELECT * FROM items";
+              $sqlQuery = mysqli_query($conn, $sqlAll);
+              while ($row = mysqli_fetch_assoc($sqlQuery)) {
+                echo "<tr>";
+                echo "<td class='item'>" . $row['identifier'] . "</td>";
+                echo "<td>";
+                echo "<section class='submission-edit'>";
+                echo "<form method='post' action='../pages/edit.php'>";
+                echo '<input type="hidden" value="' . $row['identifier'] . '" class="button" id="delete" name="hiddenText">';
+                echo "<input type='submit' value='Edit' class='button' id='edit' name='edit'>";
+                echo "</form>";
+                echo "</section>";
+                echo "</td>";
+                echo "<td>";
+                echo "<section class='submission-delete'>";
+                echo '<form method="post">';
+                echo '<input type="hidden" value="' . $row['identifier'] . '" class="button" id="delete" name="hiddenText">';
+                echo '<input type="submit" value="Delete" class="button" id="delete" name="delete" onclick="confirmFunction()">';
+                echo "</form>";
+                echo "</section>";
+                echo "</td>";
+                echo "</tr>";
+              }
+            }
+            if (isset($_POST['foodSearch'])) {
+              $result = mysqli_query($conn, $sql);
+              if (mysqli_num_rows($result) == 0) {
+                echo "<tr>";
+                echo "<td>No results found</td>";
+                echo "</tr>";
+              } else {
+                while ($row = mysqli_fetch_assoc($result)) {
                   echo "<tr>";
-                    echo "<td class='item'>" . $row['identifier'] . "</td>";
-                    echo "<td>";
-                        echo "<section class='submission-edit'>";
-                            echo "<form method='post' action='../pages/edit.php'>";
-                              echo '<input type="hidden" value="' . $row['identifier'] . '" class="button" id="delete" name="hiddenText">';
-                              echo "<input type='submit' value='Edit' class='button' id='edit' name='edit'>";
-                            echo "</form>";
-                        echo "</section>";
-                    echo "</td>";
-                    echo "<td>";
-                    echo "<section class='submission-delete'>";
-                      echo '<form method="post">';
-                        echo '<input type="hidden" value="' . $row['identifier'] . '" class="button" id="delete" name="hiddenText">';
-                        echo '<input type="submit" value="Delete" class="button" id="delete" name="delete" onclick="confirmFunction()">';
-                        echo "</form>";
-                    echo "</section>";
-                    echo "</td>";
+                  echo "<td class='item'>" . $row['identifier'] . "</td>";
+                  echo "<td>";
+                  echo "<section class='submission-edit'>";
+                  echo "<form method='post' action='../pages/edit.php'>";
+                  echo '<input type="hidden" value="' . $row['identifier'] . '" class="button" id="delete" name="hiddenText">';
+                  echo "<input type='submit' value='Edit' class='button' id='edit' name='edit'>";
+                  echo "</form>";
+                  echo "</section>";
+                  echo "</td>";
+                  echo "<td>";
+                  echo "<section class='submission-delete'>";
+                  echo '<form method="post">';
+                  echo '<input type="hidden" value="' . $row['identifier'] . '" class="button" id="delete" name="hiddenText">';
+                  echo '<input type="submit" value="Delete" class="button" id="delete" name="delete">';
+                  echo "</form>";
+                  echo "</section>";
+                  echo "</td>";
                   echo "</tr>";
                 }
               }
-              if (isset($_POST['foodSearch'])) {
-                $result = mysqli_query($conn, $sql);
-                if (mysqli_num_rows($result) == 0) {
-                    echo "<tr>";
-                      echo "<td>No results found</td>";
-                    echo "</tr>";
-                }
-                else {
-                  while ($row = mysqli_fetch_assoc($result)) {
-                    echo "<tr>";
-                      echo "<td class='item'>" . $row['identifier'] . "</td>";
-                      echo "<td>";
-                          echo "<section class='submission-edit'>";
-                              echo "<form method='post' action='../pages/edit.php'>";
-                                echo '<input type="hidden" value="' . $row['identifier'] . '" class="button" id="delete" name="hiddenText">';
-                                echo "<input type='submit' value='Edit' class='button' id='edit' name='edit'>";
-                              echo "</form>";
-                          echo "</section>";
-                      echo "</td>";
-                      echo "<td>";
-                      echo "<section class='submission-delete'>";
-                        echo '<form method="post">';
-                          echo '<input type="hidden" value="' . $row['identifier'] . '" class="button" id="delete" name="hiddenText">';
-                          echo '<input type="submit" value="Delete" class="button" id="delete" name="delete">';
-                          echo "</form>";
-                      echo "</section>";
-                      echo "</td>";
-                    echo "</tr>";
-                  }
-                }
-              }
-          ?>
+            }
+            ?>
           </table>
         </div>
       </div>
