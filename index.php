@@ -38,7 +38,7 @@
     </div>-->
     <div class="index1 top">
       <h1>What can this project do</h1>
-      <p>This page allows you to use all the ingredients and items that you create on this tool. There are four menus that you can edit: no restrcitions, vegetarian, halal and an other menu in case it is needed. Once created, the tables will also display statistics for each item and menu that has been stored.</p>
+      <p>This page allows you to use all the ingredients and items that you create on this tool. There are four menus that you can edit: no restrictions, vegetarian, halal and an other menu in case it is needed. Once created, the tables will also display statistics for each item and menu that has been stored.</p>
     </div>
     <div class="index1">
       <h1><a href="pages/calculator.php">Menu Creator</a></h1>
