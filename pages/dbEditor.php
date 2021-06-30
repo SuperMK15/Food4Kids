@@ -101,8 +101,16 @@ include_once 'connector.php';
             if (isset($_POST['baby'])) {
               $isBaby = 1;
             }
-            $addTo = "INSERT INTO items (identifier, calories, protein, calcium, iron, vitaminA, vitaminC, carbohydrates, sodium, sugar, fat, containsNuts, isVegetarian, isHalal, isBaby, price, stock) VALUES ('" . $_POST['identifier'] . "', " . $_POST['calories'] . ", " . $_POST['protein'] . ", " . $_POST['calcium'] . ", " . $_POST['iron'] . ", " . $_POST['vitamina'] . ", " . $_POST['vitaminc'] . ", " . $_POST['carbs'] . ", " . $_POST['sodium'] . ", " . $_POST['sugar'] . ", " . $_POST['fat'] . ", $isNutFree, $isVeg, $isHalal, $isBaby, " . $_POST['cost'] . ", " . $_POST['stock'] . ")";
-            $result = mysqli_query($conn, $addTo);
+
+            $checkForRepeat = "SELECT itemID FROM items WHERE identifier='" . $_POST['identifier'] . "'";
+            $repeatQuery = mysqli_query($conn, $checkForRepeat);
+
+            if (mysqli_num_rows($repeatQuery) == 0) {
+              $addTo = "INSERT INTO items (identifier, calories, protein, calcium, iron, vitaminA, vitaminC, carbohydrates, sodium, sugar, fat, containsNuts, isVegetarian, isHalal, isBaby, price, stock) VALUES ('" . $_POST['identifier'] . "', " . $_POST['calories'] . ", " . $_POST['protein'] . ", " . $_POST['calcium'] . ", " . $_POST['iron'] . ", " . $_POST['vitamina'] . ", " . $_POST['vitaminc'] . ", " . $_POST['carbs'] . ", " . $_POST['sodium'] . ", " . $_POST['sugar'] . ", " . $_POST['fat'] . ", $isNutFree, $isVeg, $isHalal, $isBaby, " . $_POST['cost'] . ", " . $_POST['stock'] . ")";
+              $result = mysqli_query($conn, $addTo);
+            } else {
+              echo "This item already exists!";
+            }
           }
           ?>
         </section>
