@@ -61,6 +61,7 @@ $tvitaminC = 0;
 $tCarbohydrates = 0;
 $tSodium = 0;
 $tSugar = 0;
+$tArtSugar = 0;
 $tFat = 0;
 $tPrice = 0.00;
 ?>
@@ -224,7 +225,8 @@ $tPrice = 0.00;
               <th>Vitamin C (%)</th>
               <th>Carbs (g)</th>
               <th>Sodium (mg)</th>
-              <th>Sugar (g)</th>
+              <th>Natural Sugar (g)</th>
+              <th>Artificial Sugar (g)</th>
               <th>Fat (g)</th>
               <th>Cost (CAD)</th>
               <th>Amount Needed</th>
@@ -232,6 +234,7 @@ $tPrice = 0.00;
             <?php
             if ($pullingMenuCode == "") {
               echo "<tr>";
+              echo "<td>Empty</td>";
               echo "<td>Empty</td>";
               echo "<td>Empty</td>";
               echo "<td>Empty</td>";
@@ -267,6 +270,7 @@ $tPrice = 0.00;
                     echo "<td>" . $itemRow['carbohydrates'] . "</td>";
                     echo "<td>" . $itemRow['sodium'] . "</td>";
                     echo "<td>" . $itemRow['sugar'] . "</td>";
+                    echo "<td>" . $itemRow['artSugar'] . "</td>";
                     echo "<td>" . $itemRow['fat'] . "</td>";
                     echo "<td>" . floatval($itemRow['price']) . "</td>";
                     $stockNeeded = intval($amountNeeded) - intval($itemRow['stock']);
@@ -284,6 +288,7 @@ $tPrice = 0.00;
                     $tCarbohydrates = $tCarbohydrates + $itemRow['carbohydrates'];
                     $tSodium = $tSodium + $itemRow['sodium'];
                     $tSugar = $tSugar + $itemRow['sugar'];
+                    $tArtSugar = $tArtSugar + $itemRow['artSugar'];
                     $tFat = $tFat + $itemRow['fat'];
                     $tPrice = $tPrice + $itemRow['price'];
                     echo "</tr>";
@@ -304,6 +309,7 @@ $tPrice = 0.00;
               echo "<th>$tCarbohydrates</th>";
               echo "<th>$tSodium</th>";
               echo "<th>$tSugar</th>";
+              echo "<th>$tArtSugar</th>";
               echo "<th>$tFat</th>";
               echo "<th>$tPrice</th>";
               echo "<th></th>";
