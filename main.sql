@@ -60,24 +60,6 @@ CREATE TABLE Menus (
   PRIMARY KEY (basketID)
 );
 
-CREATE TABLE TRACKER (
-  dateStarted TEXT,
-
-  totalCalories DECIMAL(10, 2),
-  totalProtein DECIMAL(10, 2),
-  totalCalcium DECIMAL(10, 2),
-  totalIron DECIMAL(10, 2),
-  totalVitaminA DECIMAL(10, 2),
-  totalVitaminC DECIMAL(10, 2),
-  totalCarbohydrates DECIMAL(10, 2),
-  totalSodium DECIMAL(10, 2),
-  totalSugar DECIMAL(10, 2),
-  totalArtSugar DECIMAL(10, 2),
-  totalFat DECIMAL(10, 2),
-
-  dateEnded TEXT
-);
-
 INSERT INTO Items(identifier, calories, protein, calcium, iron, vitaminA, vitaminC, carbohydrates, sodium, sugar, artSugar, fat, containsNuts, isVegetarian, isHalal, isBaby, price, stock)
   VALUES
          ('Canned Stuffed Eggplant (400g)', 125, 1, 0, 0, 0, 0, 14, 1, 0, 0, 7, 0, 1, 1, 1, 4.19, 50),
