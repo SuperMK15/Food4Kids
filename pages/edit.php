@@ -26,7 +26,7 @@ if (isset($_POST['edit'])) {
         <div class="logo"><a href="https://www.food4kidswr.ca/"><img src="../images/food4Kids.webp"></a></div>
         <ul class="menu">
           <li><a href="../index.php">Home</a></li>
-          <li><a href="../pages/calculator.php">Menu Creator</li>
+          <li><a href="../pages/menuSelector.php">Menu Creator</li>
           <li><a href="../pages/selector.php">Item Editor</a></li>
           <li><a href="../pages/menu.php">Menu Display</a></li>
         </ul>
