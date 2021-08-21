@@ -66,7 +66,7 @@
         <ul class="menu">
           <li><a href="../index.php">Home</a></li>
           <li><a href="../pages/menuSelector.php">Menu Creator</li>
-          <li><a href="../pages/selector.php">Menu Selection</a></li>
+          <li><a href="../pages/selector.php">Item Editor</a></li>
           <li><a href="../pages/menu.php">Menu Display</a></li>
         </ul>
       </nav>
