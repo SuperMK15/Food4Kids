@@ -52,7 +52,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
 
-  <title>Item Editor - Food4Kids Organizer - Waterloo Region</title>
+  <title>Menu Selection - Food4Kids Organizer - Waterloo Region</title>
   <link rel="shortcut icon" type="image/jpg" href="../images/favicon.png">
 
   <link href="../styles/theme.css" rel="stylesheet" type="text/css" />
@@ -66,7 +66,7 @@
         <ul class="menu">
           <li><a href="../index.php">Home</a></li>
           <li><a href="../pages/menuSelector.php">Menu Creator</li>
-          <li><a href="../pages/selector.php">Item Editor</a></li>
+          <li><a href="../pages/selector.php">Menu Selection</a></li>
           <li><a href="../pages/menu.php">Menu Display</a></li>
         </ul>
       </nav>
@@ -76,7 +76,7 @@
   <main>
     <div class="content">
       <div class="data1">
-        <h1>Item Editor</h1>
+        <h1>Menu Selection</h1>
         <div class="flex">
           <form method="post" action="../pages/addMenu.php">
             <section class="submission-addNew">
