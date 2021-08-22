@@ -7,11 +7,11 @@ taskkill /f /IM xampp-control.exe
 
 start xampp-control.exe
 
-cd "C:\Program Files\Google\Chrome"
-start chrome.exe http://localhost/food4kids/
-
 cd "C:\xampp"
-timeout /t 4 /nobreak >nul
+timeout /t 10 /nobreak >nul
 taskkill /f /IM xampp-control.exe
+
+cd "C:\Program Files\Google\Chrome"
+start chrome.exe http://192.168.0.105/food4kids/
 
 exit
