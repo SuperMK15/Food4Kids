@@ -22,13 +22,22 @@ if (isset($_POST['stockSubmit'])) {
     }
   }
 }
+$menuName = "";
 if (isset($_POST['menu-type-num-submit'])) {
   //basket1 is noRestrictions
   //basket2 is halal
   //basket3 is veg
   //basket4 is baby
   //basket5 is other
-  if (isset($_POST['no-restrictions'])) {
+  if (isset($_POST['menu'])) {
+    $findID = "SELECT * FROM menus WHERE menuName='" . $_POST['menu'] . "'";
+    $findIDQuery = mysqli_query($conn, $findID);
+    $findIDrow = mysqli_fetch_assoc($findIDQuery);
+    $menuNumber = $findIDrow['basketID'];
+    $pullingMenuCode = "SELECT * FROM menus WHERE basketID = $menuNumber";
+    $menuName = $_POST['menu'];
+  }
+  /*if (isset($_POST['no-restrictions'])) {
     $menuNumber = 1;
     $pullingMenuCode = "SELECT * FROM menus WHERE basketID = 1";
   } elseif (isset($_POST['halal'])) {
@@ -43,7 +52,7 @@ if (isset($_POST['menu-type-num-submit'])) {
   } else {
     $menuNumber = 5;
     $pullingMenuCode = "SELECT * FROM menus WHERE basketID = 5";
-  }
+  }*/
   if (isset($_POST['bagNum'])) {
     $amountNeeded = $_POST['bagNum'];
   }
@@ -101,16 +110,21 @@ $tPrice = 0.00;
         <div class="selection-form">
           <form method="post" action="../pages/calculator.php">
             <section class="menu-type">
-              <input type="radio" name="no-restrictions" id="no-restrictions">
-              <label for="no-restrictions">No Restrictions</label>
-              <input type="radio" name="halal" id="halal">
-              <label for="halal">Halal</label>
-              <input type="radio" name="vegetarian" id="vegetarian">
-              <label for="vegetarian">Vegetarian</label>
-              <input type="radio" name="baby" id="baby">
-              <label for="vegetarian">Baby</label>
-              <input type="radio" name="other" id="other">
-              <label for="other">Other</label>
+              <datalist id="menus">
+                <?php 
+                  if (!isset($_POST['menu'])) {
+                    $sql = "SELECT * FROM menus WHERE menuName LIKE '%" . $_POST['menu'] . "%'";
+                    $result = mysqli_query($conn, $sql);
+                    if (mysqli_num_rows($result) != 0) {
+                      while ($row = mysqli_fetch_assoc($result)) {
+                        echo "<option value='" . $row['menuName'] . "'></option>";
+                        $counter++;
+                      }
+                    }
+                  }
+                ?>
+              </datalist>
+              <input list="menus" id="menu" name="menu" placeholder="Select menu">
             </section>
             <input list="rando" id="food" name="bagNum" placeholder="Enter number of bags">
             <section class="submission">
@@ -119,7 +133,10 @@ $tPrice = 0.00;
           </form>
           <div class="select-menu">
             <?php
-            switch ($menuNumber) {
+            if ($menuName != "") {
+              echo "<p>" . $menuName . "</p>";
+            }
+            /*switch ($menuNumber) {
               case 1:
                 echo "<p>No Restrictions Menu</p>";
                 break;
@@ -138,7 +155,7 @@ $tPrice = 0.00;
               default:
                 echo "<p>Please Select a Menu</p>";
                 break;
-            }
+            }*/
             ?>
           </div>
           <ul>
@@ -191,12 +208,13 @@ $tPrice = 0.00;
                 if (mysqli_num_rows($convertQuery) != 0) {
                   $convertRow = mysqli_fetch_assoc($convertQuery);
                   $id = $convertRow['itemID'];
-                  $updateSelect = "UPDATE menus SET itemID" . $x . " = $id WHERE basketID =" . $_POST['basketNum'];
+                  $updateSelect = "UPDATE menus SET itemID" . $x . " = $id WHERE basketID = " . $_POST['basketNum'];
                   $updateQuery = mysqli_query($conn, $updateSelect);
                 } else {
-                  $updateSelect = "UPDATE menus SET itemID" . $x . " = 0 WHERE basketID =" . $_POST['basketNum'];
+                  $updateSelect = "UPDATE menus SET itemID" . $x . " = 0 WHERE basketID = " . $_POST['basketNum'];
                   $updateQuery = mysqli_query($conn, $updateSelect);
                 }
+                echo $updateSelect;
               }
             }
             ?>
