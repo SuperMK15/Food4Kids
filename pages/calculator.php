@@ -3,6 +3,10 @@ include_once 'connector.php';
 $pullingMenuCode = "";
 $menuNumber = 0;
 $amountNeeded = 0;
+if (isset($_POST['deleteMenu'])) {
+  $deleteMenuText = "DELETE FROM menus WHERE basketID =" . $_POST['menuNumber'];
+  $deleteQuery = mysqli_query($conn, $deleteMenuText);
+}
 if (isset($_POST['stockSubmit'])) {
   $selectMenu = "SELECT * FROM menus WHERE basketID =" . $_POST['menuNumber'];
   $selectQuery = mysqli_query($conn, $selectMenu);
@@ -108,6 +112,11 @@ $tPrice = 0.00;
       <h1>Menu Creator</h1>
       <div class="flex">
         <div class="selection-form">
+        <section class="submission">
+          <form method="post" action="../pages/addMenu.php">
+            <input type="submit" id="addMenu" name="addMenu" value="Add Menu" class="button">
+          </form>
+          </section>
           <form method="post" action="../pages/calculator.php">
             <section class="menu-type">
               <datalist id="menus">
@@ -124,7 +133,7 @@ $tPrice = 0.00;
                   }
                 ?>
               </datalist>
-              <input list="menus" id="menu" name="menu" placeholder="Select menu">
+              <input list="menus" id="menu" name="menu" placeholder="Select menu" autocomplete="off">
             </section>
             <input list="rando" id="food" name="bagNum" placeholder="Enter number of bags">
             <section class="submission">
@@ -224,10 +233,13 @@ $tPrice = 0.00;
               echo '<input type="hidden" name="menuNumber" value="' . $menuNumber . '" >';
               echo '<input type="hidden" name="amountNeeded" value="' . $amountNeeded . '" >';
               echo '<input type="submit" value="Clear Stock" class="button" name="stockSubmit">';
+              echo '<br><br><br>';
+              echo '<input type="submit" value="Delete Menu" class="button" name="deleteMenu">';
               echo '</section>';
               echo '</form>';
             }
             ?>
+
           </ul>
         </div>
         <div class="calc-table">
