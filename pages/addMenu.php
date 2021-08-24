@@ -49,14 +49,14 @@
       <!--code for right side-->
         <div class="selection-form">
           <div class="select-menu">
-          <p>Menu Name</p>
+          <form method="post" action="../pages/calculator.php">
+          <p>Type Menu Name:</p>
             <?php
               echo '<input type="text" id="food" name="newMenuName" placeholder="Menu Name">';
             ?>
             <p>Items</p>
           </div>
           <ul>
-            <form method="post" action="../pages/menuEditor.php">
               <datalist id="foods">
                 <?php
                 if (!isset($_POST['item1'])) {
@@ -81,7 +81,7 @@
                   echo "</li>";
                 }
                 echo '<section class="submission">';
-                echo '<input type="submit" value="Add" class="button" name="calSubmit">';
+                echo '<input type="submit" value="Add" class="button" name="addSubmit">';
                 echo '</section>';
               ?>
             </form>
