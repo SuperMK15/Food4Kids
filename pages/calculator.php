@@ -214,7 +214,6 @@ $tPrice = 0.00;
                   $updateSelect = "UPDATE menus SET itemID" . $x . " = 0 WHERE basketID = " . $_POST['basketNum'];
                   $updateQuery = mysqli_query($conn, $updateSelect);
                 }
-                echo $updateSelect;
               }
             }
             ?>
