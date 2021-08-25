@@ -223,20 +223,7 @@ $tPrice = 0.00;
             <?php
             if ($pullingMenuCode == "") {
               echo "<tr>";
-              echo "<td>Empty</td>";
-              echo "<td>Empty</td>";
-              echo "<td>Empty</td>";
-              echo "<td>Empty</td>";
-              echo "<td>Empty</td>";
-              echo "<td>Empty</td>";
-              echo "<td>Empty</td>";
-              echo "<td>Empty</td>";
-              echo "<td>Empty</td>";
-              echo "<td>Empty</td>";
-              echo "<td>Empty</td>";
-              echo "<td>Empty</td>";
-              echo "<td>Empty</td>";
-              echo "<td>Empty</td>";
+              for($i = 0; $i < 14; $i++) echo "<td>Empty</td>";
               echo "</tr>";
             } else {
               $pullingMenuQuery = mysqli_query($conn, $pullingMenuCode);
