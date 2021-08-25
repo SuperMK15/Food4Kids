@@ -12,6 +12,42 @@
   $tArtSugar = 0;
   $tFat = 0;
   $tPrice = 0.00;
+
+  $leftBlank = false;
+  $repeatedName = false;
+
+  if (isset($_POST['addSubmit'])) {
+    $checkForRepeatText = "SELECT basketID FROM menus WHERE menuName='" . $_POST['newMenuName'] . "'";
+    $checkForRepeatQuery = mysqli_query($conn, $checkForRepeatText);
+
+    if(mysqli_num_rows($checkForRepeatQuery) != 0) {
+      $repeatedName = true;
+      $repeatedNameDisplay = $_POST['newMenuName'];
+    } 
+    else if(strlen(trim($_POST['newMenuName'])) == 0) {
+      $leftBlank = true;
+    }
+    else {
+      $addingMenuText = "INSERT INTO menus (menuName) VALUES ('" . $_POST['newMenuName'] . "')";
+      $addingMenuQuery = mysqli_query($conn, $addingMenuText);
+      for ($x = 1; $x <= 25; $x++) {
+        $convertTextToID = "SELECT itemID FROM items WHERE identifier='" . $_POST['item' . $x] . "'";
+        $convertQuery = mysqli_query($conn, $convertTextToID);
+        if (mysqli_num_rows($convertQuery) != 0) {
+          $convertRow = mysqli_fetch_assoc($convertQuery);
+          $id = $convertRow['itemID'];
+          $updateSelect = "UPDATE menus SET itemID" . $x . " = $id WHERE menuName = '" . $_POST['newMenuName'] . "'";
+          $updateQuery = mysqli_query($conn, $updateSelect);
+        } else {
+          $updateSelect = "UPDATE menus SET itemID" . $x . " = 0 WHERE menuName = '" . $_POST['newMenuName'] . "'";
+          $updateQuery = mysqli_query($conn, $updateSelect);
+        }
+      }
+      header("Location: ./calculator.php");
+      exit();
+    }
+  }
+  
 ?>
 
 <!DOCTYPE html>
@@ -49,10 +85,13 @@
       <!--code for right side-->
         <div class="selection-form">
           <div class="select-menu">
-          <form method="post" action="../pages/calculator.php">
+          <!--<form method="post" action="../pages/calculator.php">-->
+          <form method="post">
           <p>Type Menu Name:</p>
             <?php
-              echo '<input type="text" id="food" name="newMenuName" placeholder="Menu Name">';
+              echo '<input type="text" id="food" name="newMenuName" placeholder="Menu Name" autocomplete="off">';
+              if($leftBlank) echo "<h5>Error: Please Do Not Leave Menu Name Blank!</h5>";
+              else if($repeatedName) echo "<h5>Error: The Name \"" . $repeatedNameDisplay . "\" Has Already Been Used!</h5>";
             ?>
             <p>Items</p>
           </div>
