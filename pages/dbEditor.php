@@ -109,7 +109,8 @@ include_once 'connector.php';
               $addTo = "INSERT INTO items (identifier, calories, protein, calcium, iron, vitaminA, vitaminC, carbohydrates, sodium, sugar, fat, containsNuts, isVegetarian, isHalal, isBaby, price, stock) VALUES ('" . $_POST['identifier'] . "', " . $_POST['calories'] . ", " . $_POST['protein'] . ", " . $_POST['calcium'] . ", " . $_POST['iron'] . ", " . $_POST['vitamina'] . ", " . $_POST['vitaminc'] . ", " . $_POST['carbs'] . ", " . $_POST['sodium'] . ", " . $_POST['sugar'] . ", " . $_POST['fat'] . ", $isNutFree, $isVeg, $isHalal, $isBaby, " . $_POST['cost'] . ", " . $_POST['stock'] . ")";
               $result = mysqli_query($conn, $addTo);
             } else {
-              echo "<h3>The item name \"" . $_POST['identifier'] . "\" is already in use!</h3>";
+              echo "<h3> </h3><br>";
+              echo "<h3>Error: The item name \"" . $_POST['identifier'] . "\" is already in use!</h3>";
             }
           }
           ?>
