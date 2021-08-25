@@ -7,43 +7,6 @@ if (isset($_POST['delete'])) {
   $deleteSql = "DELETE FROM items WHERE identifier='" . $_POST['hiddenText'] . "'";
   $deleteResult = mysqli_query($conn, $deleteSql);
 }
-if (isset($_POST['editSubmit'])) {
-  $uIdentifier = $_POST['updateIdentifier'];
-  $ucalories = $_POST['calories'];
-  $uprotein = $_POST['protein'];
-  $ucalcium = $_POST['calcium'];
-  $uiron = $_POST['iron'];
-  $uvitaminA = $_POST['vitamina'];
-  $uvitaminC = $_POST['vitaminc'];
-  $ucarbohydrates = $_POST['carbs'];
-  $usodium = $_POST['sodium'];
-  $usugar = $_POST['sugar'];
-  $uartsugar = $_POST['artSugar'];
-  $ufat = $_POST['fat'];
-  $ucalories = $_POST['calories'];
-  $ustock = $_POST['stock'];
-  $ucost = $_POST['cost'];
-  $uID = $_POST['itemID'];
-
-  $isNutFree = 0;
-  $isVeg = 0;
-  $isHalal = 0;
-  $isBaby = 0;
-  if (isset($_POST['nut-free'])) {
-    $isNutFree = 1;
-  }
-  if (isset($_POST['halal'])) {
-    $isHalal = 1;
-  }
-  if (isset($_POST['vegetarian'])) {
-    $isVeg = 1;
-  }
-  if (isset($_POST['baby'])) {
-    $isBaby = 1;
-  }
-  $updateSelect = "UPDATE items SET identifier='$uIdentifier', calories=$ucalories, protein=$uprotein, calcium=$ucalcium, iron=$uiron, vitaminA=$uvitaminA, vitaminC=$uvitaminC, sodium=$usodium, sugar=$usugar, artSugar=$uartsugar, fat=$ufat, calories=$ucalories, stock=$ustock, price=$ucost, containsNuts=$isNutFree, isVegetarian=$isVeg, isHalal=$isHalal, isBaby=$isBaby WHERE itemID = $uID";
-  $updateQuery = mysqli_query($conn, $updateSelect);
-}
 ?>
 
 <!DOCTYPE html>
