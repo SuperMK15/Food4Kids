@@ -1,53 +1,58 @@
 <?php
-  include_once 'connector.php';
-  $tCalories = 0;
-  $tProtein = 0;
-  $tCalcium = 0;
-  $tIron = 0;
-  $tvitaminA = 0;
-  $tvitaminC = 0;
-  $tCarbohydrates = 0;
-  $tSodium = 0;
-  $tSugar = 0;
-  $tArtSugar = 0;
-  $tFat = 0;
-  $tPrice = 0.00;
+include_once 'connector.php';
+$tCalories = 0;
+$tProtein = 0;
+$tCalcium = 0;
+$tIron = 0;
+$tvitaminA = 0;
+$tvitaminC = 0;
+$tCarbohydrates = 0;
+$tSodium = 0;
+$tSugar = 0;
+$tArtSugar = 0;
+$tFat = 0;
+$tPrice = 0.00;
 
-  $leftBlank = false;
-  $repeatedName = false;
+$leftBlank = false;
+$repeatedName = false;
 
-  if (isset($_POST['addSubmit'])) {
-    $checkForRepeatText = "SELECT basketID FROM menus WHERE menuName='" . $_POST['newMenuName'] . "'";
-    $checkForRepeatQuery = mysqli_query($conn, $checkForRepeatText);
+if (isset($_POST['addSubmit'])) {
+  $checkForRepeatText = "SELECT basketID FROM menus WHERE menuName='" . $_POST['newMenuName'] . "'";
+  $checkForRepeatQuery = mysqli_query($conn, $checkForRepeatText);
 
-    if(mysqli_num_rows($checkForRepeatQuery) != 0) {
+  if (mysqli_num_rows($checkForRepeatQuery) != 0 || strlen(trim($_POST['newMenuName'])) == 0) {
+    if (mysqli_num_rows($checkForRepeatQuery) != 0) {
       $repeatedName = true;
       $repeatedNameDisplay = $_POST['newMenuName'];
-    } 
-    else if(strlen(trim($_POST['newMenuName'])) == 0) {
+    } else if (strlen(trim($_POST['newMenuName'])) == 0) {
       $leftBlank = true;
     }
-    else {
-      $addingMenuText = "INSERT INTO menus (menuName) VALUES ('" . $_POST['newMenuName'] . "')";
-      $addingMenuQuery = mysqli_query($conn, $addingMenuText);
-      for ($x = 1; $x <= 25; $x++) {
-        $convertTextToID = "SELECT itemID FROM items WHERE identifier='" . $_POST['item' . $x] . "'";
-        $convertQuery = mysqli_query($conn, $convertTextToID);
-        if (mysqli_num_rows($convertQuery) != 0) {
-          $convertRow = mysqli_fetch_assoc($convertQuery);
-          $id = $convertRow['itemID'];
-          $updateSelect = "UPDATE menus SET itemID" . $x . " = $id WHERE menuName = '" . $_POST['newMenuName'] . "'";
-          $updateQuery = mysqli_query($conn, $updateSelect);
-        } else {
-          $updateSelect = "UPDATE menus SET itemID" . $x . " = 0 WHERE menuName = '" . $_POST['newMenuName'] . "'";
-          $updateQuery = mysqli_query($conn, $updateSelect);
-        }
-      }
-      header("Location: ./calculator.php");
-      exit();
+
+    $items = array_fill(0, 30, "");
+    for ($i = 1; $i <= 25; $i++) {
+      $items[$i] = $_POST["item" . $i];
     }
+  } else {
+    $addingMenuText = "INSERT INTO menus (menuName) VALUES ('" . $_POST['newMenuName'] . "')";
+    $addingMenuQuery = mysqli_query($conn, $addingMenuText);
+    for ($x = 1; $x <= 25; $x++) {
+      $convertTextToID = "SELECT itemID FROM items WHERE identifier='" . $_POST['item' . $x] . "'";
+      $convertQuery = mysqli_query($conn, $convertTextToID);
+      if (mysqli_num_rows($convertQuery) != 0) {
+        $convertRow = mysqli_fetch_assoc($convertQuery);
+        $id = $convertRow['itemID'];
+        $updateSelect = "UPDATE menus SET itemID" . $x . " = $id WHERE menuName = '" . $_POST['newMenuName'] . "'";
+        $updateQuery = mysqli_query($conn, $updateSelect);
+      } else {
+        $updateSelect = "UPDATE menus SET itemID" . $x . " = 0 WHERE menuName = '" . $_POST['newMenuName'] . "'";
+        $updateQuery = mysqli_query($conn, $updateSelect);
+      }
+    }
+    header("Location: ./calculator.php");
+    exit();
   }
-  
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -79,57 +84,71 @@
   </header>
 
   <main>
-  <div class="calc1">
+    <div class="calc1">
       <h1>Menu Creator</h1>
       <div class="flex">
-      <!--code for right side-->
+        <!--code for right side-->
         <div class="selection-form">
           <div class="select-menu">
-          <!--<form method="post" action="../pages/calculator.php">-->
-          <form method="post">
-          <p>Type Menu Name:</p>
-            <?php
-              echo '<input type="text" id="food" name="newMenuName" placeholder="Menu Name" autocomplete="off">';
-              if($leftBlank) {
+            <form method="post">
+              <p>Type Menu Name:</p>
+              <?php
+              if($repeatedName) {
+                echo '<input type="text" id="food" name="newMenuName" value="' . $repeatedNameDisplay . '" autocomplete="off">';
+              } 
+              else {
+                echo '<input type="text" id="food" name="newMenuName" placeholder="Menu Name" autocomplete="off">';
+              }
+              if ($leftBlank) {
                 echo "<h5> </h5><br>";
                 echo "<h5>Error: Please Do Not Leave Menu Name Blank!</h5>";
-              }
-              else if($repeatedName) {
+              } else if ($repeatedName) {
                 echo "<h5> </h5><br>";
                 echo "<h5>Error: The Name \"" . $repeatedNameDisplay . "\" Has Already Been Used!</h5>";
               }
               echo "<h5> </h5><br>";
-            ?>
-            <p>Items</p>
+              ?>
+              <p>Items</p>
           </div>
           <ul>
-              <datalist id="foods">
-                <?php
-                if (!isset($_POST['item1'])) {
-                  $sql = "SELECT * FROM items WHERE identifier LIKE '%" . $_POST['item1'] . "%'";
-                  $result = mysqli_query($conn, $sql);
-                  if (mysqli_num_rows($result) != 0) {
-                    while ($row = mysqli_fetch_assoc($result)) {
-                      echo "<option value='" . $row['identifier'] . "'></option>";
-                      $counter++;
-                    }
+            <datalist id="foods">
+              <?php
+              if (!isset($_POST['item1'])) {
+                $sql = "SELECT * FROM items WHERE identifier LIKE '%" . $_POST['item1'] . "%'";
+                $result = mysqli_query($conn, $sql);
+                if (mysqli_num_rows($result) != 0) {
+                  while ($row = mysqli_fetch_assoc($result)) {
+                    echo "<option value='" . $row['identifier'] . "'></option>";
+                    $counter++;
                   }
                 }
-                ?>
-              </datalist>
-              <?php
-                //$pullingMenuQuery = mysqli_query($conn, $pullingMenuCode);
-                //$row = mysqli_fetch_assoc($pullingMenuQuery);
-                for ($x = 1; $x <= 25; $x++) {
-                  echo "<li>";
-                  $itemIdentifier = null;
-                  echo '<input list="foods" id="food" name="item' . $x . '" placeholder="Select item" value="' . $itemIdentifier . '">';
-                  echo "</li>";
-                }
-                echo '<section class="submission">';
-                echo '<input type="submit" value="Add" class="button" name="addSubmit">';
-                echo '</section>';
+              }
               ?>
+            </datalist>
+            <?php
+            //$pullingMenuQuery = mysqli_query($conn, $pullingMenuCode);
+            //$row = mysqli_fetch_assoc($pullingMenuQuery);
+            if ($repeatedName || $leftBlank) {
+              for ($x = 1; $x <= 25; $x++) {
+                echo "<li>";
+                echo '<input list="foods" id="food" name="item' . $x . '" placeholder="Select item" value="' . $items[$x] . '">';
+                echo "</li>";
+              }
+              echo '<section class="submission">';
+              echo '<input type="submit" value="Add" class="button" name="addSubmit">';
+              echo '</section>';
+            } else {
+              for ($x = 1; $x <= 25; $x++) {
+                echo "<li>";
+                $itemIdentifier = null;
+                echo '<input list="foods" id="food" name="item' . $x . '" placeholder="Select item" value="' . $itemIdentifier . '">';
+                echo "</li>";
+              }
+              echo '<section class="submission">';
+              echo '<input type="submit" value="Add" class="button" name="addSubmit">';
+              echo '</section>';
+            }
+            ?>
             </form>
             <?php
             /*if (isset($_POST['calSubmit'])) {
