@@ -87,7 +87,6 @@ if (isset($_POST['addSubmit'])) {
     <div class="calc1">
       <h1>Menu Creator</h1>
       <div class="flex">
-        <!--code for right side-->
         <div class="selection-form">
           <div class="select-menu">
             <form method="post">
@@ -126,8 +125,6 @@ if (isset($_POST['addSubmit'])) {
               ?>
             </datalist>
             <?php
-            //$pullingMenuQuery = mysqli_query($conn, $pullingMenuCode);
-            //$row = mysqli_fetch_assoc($pullingMenuQuery);
             if ($repeatedName || $leftBlank) {
               for ($x = 1; $x <= 25; $x++) {
                 echo "<li>";
@@ -150,34 +147,6 @@ if (isset($_POST['addSubmit'])) {
             }
             ?>
             </form>
-            <?php
-            /*if (isset($_POST['calSubmit'])) {
-              for ($x = 1; $x <= 25; $x++) {
-                $convertTextToID = "SELECT itemID FROM items WHERE identifier='" . $_POST['item' . $x] . "'";
-                $convertQuery = mysqli_query($conn, $convertTextToID);
-                if (mysqli_num_rows($convertQuery) != 0) {
-                  $convertRow = mysqli_fetch_assoc($convertQuery);
-                  $id = $convertRow['itemID'];
-                  $updateSelect = "UPDATE menus SET itemID" . $x . " = $id WHERE basketID =" . $_POST['basketNum'];
-                  $updateQuery = mysqli_query($conn, $updateSelect);
-                } else {
-                  $updateSelect = "UPDATE menus SET itemID" . $x . " = 0 WHERE basketID =" . $_POST['basketNum'];
-                  $updateQuery = mysqli_query($conn, $updateSelect);
-                }
-              }
-            }*/
-            ?>
-            <?php
-            /*if ($menuNumber != 0) {
-              echo '<form method="post" action="../pages/menuEditor.php">';
-              echo '<section class="submission">';
-              echo '<input type="hidden" name="menuNumber" value="' . $menuNumber . '" >';
-              echo '<input type="hidden" name="amountNeeded" value="' . $amountNeeded . '" >';
-              echo '<input type="submit" value="Clear Stock" class="button" name="stockSubmit">';
-              echo '</section>';
-              echo '</form>';
-            }*/
-            ?>
           </ul>
         </div>
         <div class="calc-table">
@@ -198,72 +167,6 @@ if (isset($_POST['addSubmit'])) {
               <th>Cost (CAD)</th>
               <th>Amount Needed</th>
             </tr>
-            <?php
-            /*if ($pullingMenuCode == "") {
-              echo "<tr>";
-              echo "<td>Empty</td>";
-              echo "<td>Empty</td>";
-              echo "<td>Empty</td>";
-              echo "<td>Empty</td>";
-              echo "<td>Empty</td>";
-              echo "<td>Empty</td>";
-              echo "<td>Empty</td>";
-              echo "<td>Empty</td>";
-              echo "<td>Empty</td>";
-              echo "<td>Empty</td>";
-              echo "<td>Empty</td>";
-              echo "<td>Empty</td>";
-              echo "<td>Empty</td>";
-              echo "<td>Empty</td>";
-              echo "</tr>";
-            } else {
-              $pullingMenuQuery = mysqli_query($conn, $pullingMenuCode);
-              $row = mysqli_fetch_assoc($pullingMenuQuery);
-              for ($x = 1; $x <= 25; $x++) {
-                if ($row['itemID' . $x] != 0) {
-                  $mitemID = $row['itemID' . $x];
-                  $itemQuery = "SELECT * FROM items WHERE itemID = $mitemID";
-                  $itemResult = mysqli_query($conn, $itemQuery);
-                  if (mysqli_num_rows($itemResult) != 0) {
-                    $itemRow = mysqli_fetch_assoc($itemResult);
-                    echo "<tr>";
-                    echo "<td>" . $itemRow['identifier'] . "</td>";
-                    echo "<td>" . $itemRow['calories'] . "</td>";
-                    echo "<td>" . $itemRow['protein'] . "</td>";
-                    echo "<td>" . $itemRow['calcium'] . "</td>";
-                    echo "<td>" . $itemRow['iron'] . "</td>";
-                    echo "<td>" . $itemRow['vitaminA'] . "</td>";
-                    echo "<td>" . $itemRow['vitaminC'] . "</td>";
-                    echo "<td>" . $itemRow['carbohydrates'] . "</td>";
-                    echo "<td>" . $itemRow['sodium'] . "</td>";
-                    echo "<td>" . $itemRow['sugar'] . "</td>";
-                    echo "<td>" . $itemRow['artSugar'] . "</td>";
-                    echo "<td>" . $itemRow['fat'] . "</td>";
-                    echo "<td>" . floatval($itemRow['price']) . "</td>";
-                    $stockNeeded = intval($amountNeeded) - intval($itemRow['stock']);
-                    if ($stockNeeded > 0) {
-                      echo "<td>" . $stockNeeded . "</td>";
-                    } else {
-                      echo "<td>None</td>";
-                    }
-                    $tCalories = $tCalories + $itemRow['calories'];
-                    $tProtein = $tProtein + $itemRow['protein'];
-                    $tCalcium = $tCalcium + $itemRow['calcium'];
-                    $tIron = $tIron + $itemRow['iron'];
-                    $tvitaminA = $tvitaminA + $itemRow['vitaminA'];
-                    $tvitaminC = $tvitaminC + $itemRow['vitaminC'];
-                    $tCarbohydrates = $tCarbohydrates + $itemRow['carbohydrates'];
-                    $tSodium = $tSodium + $itemRow['sodium'];
-                    $tSugar = $tSugar + $itemRow['sugar'];
-                    $tArtSugar = $tArtSugar + $itemRow['artSugar'];
-                    $tFat = $tFat + $itemRow['fat'];
-                    $tPrice = $tPrice + $itemRow['price'];
-                    echo "</tr>";
-                  }
-                }
-              }
-            }*/
-            ?>
             <tr>
               <th>Total</th>
               <?php
