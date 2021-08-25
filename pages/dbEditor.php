@@ -48,7 +48,8 @@ include_once 'connector.php';
                 <th>Vitamin C (%)</th>
                 <th>Carbs (g)</th>
                 <th>Sodium (mg)</th>
-                <th>Sugar (g)</th>
+                <th>Natural Sugar (g)</th>
+                <th>Artifical Sugar (g)</th>
                 <th>Fat (g)</th>
                 <th>Stock</th>
                 <th>Cost (CAD)</th>
@@ -64,6 +65,7 @@ include_once 'connector.php';
                 <td><input type="text" id="carbs" name="carbs" value="0"></td>
                 <td><input type="text" id="sodium" name="sodium" value="0"></td>
                 <td><input type="text" id="sugar" name="sugar" value="0"></td>
+                <td><input type="text" id="sugar" name="artsugar" value="0"></td>
                 <td><input type="text" id="fat" name="fat" value="0"></td>
                 <td><input type="text" id="stock" name="stock" value="0"></td>
                 <td><input type="text" id="cost" name="cost" value="0"></td>
@@ -106,7 +108,7 @@ include_once 'connector.php';
             $repeatQuery = mysqli_query($conn, $checkForRepeat);
 
             if (mysqli_num_rows($repeatQuery) == 0) {
-              $addTo = "INSERT INTO items (identifier, calories, protein, calcium, iron, vitaminA, vitaminC, carbohydrates, sodium, sugar, fat, containsNuts, isVegetarian, isHalal, isBaby, price, stock) VALUES ('" . $_POST['identifier'] . "', " . $_POST['calories'] . ", " . $_POST['protein'] . ", " . $_POST['calcium'] . ", " . $_POST['iron'] . ", " . $_POST['vitamina'] . ", " . $_POST['vitaminc'] . ", " . $_POST['carbs'] . ", " . $_POST['sodium'] . ", " . $_POST['sugar'] . ", " . $_POST['fat'] . ", $isNutFree, $isVeg, $isHalal, $isBaby, " . $_POST['cost'] . ", " . $_POST['stock'] . ")";
+              $addTo = "INSERT INTO items (identifier, calories, protein, calcium, iron, vitaminA, vitaminC, carbohydrates, sodium, sugar, artSugar, fat, containsNuts, isVegetarian, isHalal, isBaby, price, stock) VALUES ('" . $_POST['identifier'] . "', " . $_POST['calories'] . ", " . $_POST['protein'] . ", " . $_POST['calcium'] . ", " . $_POST['iron'] . ", " . $_POST['vitamina'] . ", " . $_POST['vitaminc'] . ", " . $_POST['carbs'] . ", " . $_POST['sodium'] . ", " . $_POST['sugar'] . ", " . $_POST['artsugar'] . ", " . $_POST['fat'] . ", $isNutFree, $isVeg, $isHalal, $isBaby, " . $_POST['cost'] . ", " . $_POST['stock'] . ")";
               $result = mysqli_query($conn, $addTo);
             } else {
               echo "<h3> </h3><br>";
