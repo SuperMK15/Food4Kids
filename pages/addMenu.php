@@ -1,17 +1,5 @@
 <?php
 include_once 'connector.php';
-$tCalories = 0;
-$tProtein = 0;
-$tCalcium = 0;
-$tIron = 0;
-$tvitaminA = 0;
-$tvitaminC = 0;
-$tCarbohydrates = 0;
-$tSodium = 0;
-$tSugar = 0;
-$tArtSugar = 0;
-$tFat = 0;
-$tPrice = 0.00;
 
 $leftBlank = false;
 $repeatedName = false;
@@ -170,19 +158,7 @@ if (isset($_POST['addSubmit'])) {
             <tr>
               <th>Total</th>
               <?php
-              echo "<th>$tCalories</th>";
-              echo "<th>$tProtein</th>";
-              echo "<th>$tCalcium</th>";
-              echo "<th>$tIron</th>";
-              echo "<th>$tvitaminA</th>";
-              echo "<th>$tvitaminC</th>";
-              echo "<th>$tCarbohydrates</th>";
-              echo "<th>$tSodium</th>";
-              echo "<th>$tSugar</th>";
-              echo "<th>$tArtSugar</th>";
-              echo "<th>$tFat</th>";
-              echo "<th>$tPrice</th>";
-              echo "<th></th>";
+              for($i = 0; $i < 13; $i++) echo "<th></th>";
               ?>
             </tr>
           </table>
