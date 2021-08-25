@@ -52,7 +52,8 @@ if (isset($_POST['edit'])) {
                 <th>Vitamin C (%)</th>
                 <th>Carbs (g)</th>
                 <th>Sodium (mg)</th>
-                <th>Sugar (g)</th>
+                <th>Natural Sugar (g)</th>
+                <th>Artificial Sugar (g)</th>
                 <th>Fat (g)</th>
                 <th>Stock (#)</th>
                 <th>Cost (CAD)</th>
@@ -72,6 +73,7 @@ if (isset($_POST['edit'])) {
                     echo '<td><input type="text" id="nutrition" name="carbs" value="' . $editRow['carbohydrates'] . '"></td>';
                     echo '<td><input type="text" id="nutrition" name="sodium" value="' . $editRow['sodium'] . '"></td>';
                     echo '<td><input type="text" id="nutrition" name="sugar" value="' . $editRow['sugar'] . '"></td>';
+                    echo '<td><input type="text" id="nutrition" name="artSugar" value="' . $editRow['artSugar'] . '"></td>';
                     echo '<td><input type="text" id="nutrition" name="fat" value="' . $editRow['fat'] . '"></td>';
                     echo '<td><input type="text" id="nutrition" name="stock" value="' . $editRow['stock'] . '"></td>';
                     echo '<td><input type="text" id="nutrition" name="cost" value="' . $editRow['price'] . '"></td>';
