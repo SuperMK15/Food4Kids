@@ -3,25 +3,6 @@ include_once 'connector.php';
 $pullingMenuCode = "";
 $menuNumber = 0;
 $amountNeeded = 0;
-if (isset($_POST['addSubmit'])) {
-  $addingMenuText = "INSERT INTO menus (menuName) VALUES ('" . $_POST['newMenuName'] . "')";
-  $addingMenuQuery = mysqli_query($conn, $addingMenuText);
-  //$itemIDs = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-  for ($x = 1; $x <= 25; $x++) {
-    $convertTextToID = "SELECT itemID FROM items WHERE identifier='" . $_POST['item' . $x] . "'";
-    $convertQuery = mysqli_query($conn, $convertTextToID);
-    if (mysqli_num_rows($convertQuery) != 0) {
-      $convertRow = mysqli_fetch_assoc($convertQuery);
-      $id = $convertRow['itemID'];
-      $updateSelect = "UPDATE menus SET itemID" . $x . " = $id WHERE menuName = '" . $_POST['newMenuName'] . "'";
-      $updateQuery = mysqli_query($conn, $updateSelect);
-    } else {
-      $updateSelect = "UPDATE menus SET itemID" . $x . " = 0 WHERE menuName = '" . $_POST['newMenuName'] . "'";
-      $updateQuery = mysqli_query($conn, $updateSelect);
-    }
-  }
-  //echo $addingMenuText;
-}
 
 if (isset($_POST['deleteMenu'])) {
   $deleteMenuText = "DELETE FROM menus WHERE basketID =" . $_POST['menuNumber'];
@@ -155,7 +136,7 @@ $tPrice = 0.00;
               </datalist>
               <input list="menus" id="menu" name="menu" placeholder="Select menu" autocomplete="off">
             </section>
-            <input list="rando" id="food" name="bagNum" placeholder="Enter number of bags">
+            <input list="rando" id="food" name="bagNum" placeholder="Enter number of bags" autocomplete="off">
             <section class="submission">
               <input type="submit" value="Open" class="button" name="menu-type-num-submit">
             </section>
