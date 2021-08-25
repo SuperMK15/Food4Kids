@@ -156,10 +156,12 @@ if (isset($_POST['addSubmit'])) {
               <th>Amount Needed</th>
             </tr>
             <tr>
+              <?php for($i = 0; $i < 14; $i++) echo "<td>Empty</td>"; ?>
+            </tr>
+            <tr>
               <th>Total</th>
-              <?php
-              for($i = 0; $i < 13; $i++) echo "<th></th>";
-              ?>
+              <?php for($i = 0; $i < 12; $i++) echo "<th>0</th>"; ?>
+              <th></th>
             </tr>
           </table>
         </div>
