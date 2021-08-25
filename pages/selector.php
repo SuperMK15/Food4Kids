@@ -18,6 +18,7 @@ if (isset($_POST['editSubmit'])) {
   $ucarbohydrates = $_POST['carbs'];
   $usodium = $_POST['sodium'];
   $usugar = $_POST['sugar'];
+  $uartsugar = $_POST['artSugar'];
   $ufat = $_POST['fat'];
   $ucalories = $_POST['calories'];
   $ustock = $_POST['stock'];
@@ -40,7 +41,7 @@ if (isset($_POST['editSubmit'])) {
   if (isset($_POST['baby'])) {
     $isBaby = 1;
   }
-  $updateSelect = "UPDATE items SET identifier='$uIdentifier', calories=$ucalories, protein=$uprotein, calcium=$ucalcium, iron=$uiron, vitaminA=$uvitaminA, vitaminC=$uvitaminC, sodium=$usodium, sugar=$usugar, fat=$ufat, calories=$ucalories, stock=$ustock, price=$ucost, containsNuts=$isNutFree, isVegetarian=$isVeg, isHalal=$isHalal, isBaby=$isBaby WHERE itemID = $uID";
+  $updateSelect = "UPDATE items SET identifier='$uIdentifier', calories=$ucalories, protein=$uprotein, calcium=$ucalcium, iron=$uiron, vitaminA=$uvitaminA, vitaminC=$uvitaminC, sodium=$usodium, sugar=$usugar, artSugar=$uartsugar, fat=$ufat, calories=$ucalories, stock=$ustock, price=$ucost, containsNuts=$isNutFree, isVegetarian=$isVeg, isHalal=$isHalal, isBaby=$isBaby WHERE itemID = $uID";
   $updateQuery = mysqli_query($conn, $updateSelect);
 }
 ?>
