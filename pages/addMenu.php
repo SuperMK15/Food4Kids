@@ -90,8 +90,15 @@
           <p>Type Menu Name:</p>
             <?php
               echo '<input type="text" id="food" name="newMenuName" placeholder="Menu Name" autocomplete="off">';
-              if($leftBlank) echo "<h5>Error: Please Do Not Leave Menu Name Blank!</h5>";
-              else if($repeatedName) echo "<h5>Error: The Name \"" . $repeatedNameDisplay . "\" Has Already Been Used!</h5>";
+              if($leftBlank) {
+                echo "<h5> </h5><br>";
+                echo "<h5>Error: Please Do Not Leave Menu Name Blank!</h5>";
+              }
+              else if($repeatedName) {
+                echo "<h5> </h5><br>";
+                echo "<h5>Error: The Name \"" . $repeatedNameDisplay . "\" Has Already Been Used!</h5>";
+              }
+              echo "<h5> </h5><br>";
             ?>
             <p>Items</p>
           </div>
