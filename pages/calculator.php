@@ -29,11 +29,6 @@ if (isset($_POST['stockSubmit'])) {
 }
 $menuName = "";
 if (isset($_POST['menu-type-num-submit'])) {
-  //basket1 is noRestrictions
-  //basket2 is halal
-  //basket3 is veg
-  //basket4 is baby
-  //basket5 is other
   if (isset($_POST['menu'])) {
     $findID = "SELECT * FROM menus WHERE menuName='" . $_POST['menu'] . "'";
     $findIDQuery = mysqli_query($conn, $findID);
@@ -42,22 +37,6 @@ if (isset($_POST['menu-type-num-submit'])) {
     $pullingMenuCode = "SELECT * FROM menus WHERE basketID = $menuNumber";
     $menuName = $_POST['menu'];
   }
-  /*if (isset($_POST['no-restrictions'])) {
-    $menuNumber = 1;
-    $pullingMenuCode = "SELECT * FROM menus WHERE basketID = 1";
-  } elseif (isset($_POST['halal'])) {
-    $menuNumber = 2;
-    $pullingMenuCode = "SELECT * FROM menus WHERE basketID = 2";
-  } elseif (isset($_POST['vegetarian'])) {
-    $menuNumber = 3;
-    $pullingMenuCode = "SELECT * FROM menus WHERE basketID = 3";
-  } elseif (isset($_POST['baby'])) {
-    $menuNumber = 4;
-    $pullingMenuCode = "SELECT * FROM menus WHERE basketID = 4";
-  } else {
-    $menuNumber = 5;
-    $pullingMenuCode = "SELECT * FROM menus WHERE basketID = 5";
-  }*/
   if (isset($_POST['bagNum'])) {
     $amountNeeded = $_POST['bagNum'];
   }
@@ -146,26 +125,6 @@ $tPrice = 0.00;
             if ($menuName != "") {
               echo "<p>" . $menuName . "</p>";
             }
-            /*switch ($menuNumber) {
-              case 1:
-                echo "<p>No Restrictions Menu</p>";
-                break;
-              case 2:
-                echo "<p>Halal Menu</p>";
-                break;
-              case 3:
-                echo "<p>Vegetarian Menu</p>";
-                break;
-              case 4:
-                echo "<p>Baby Menu</p>";
-                break;
-              case 5:
-                echo "<p>Other Menu</p>";
-                break;
-              default:
-                echo "<p>Please Select a Menu</p>";
-                break;
-            }*/
             ?>
           </div>
           <ul>
