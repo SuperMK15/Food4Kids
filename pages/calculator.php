@@ -116,7 +116,7 @@ $tPrice = 0.00;
                   }
                 ?>
               </datalist>
-              <input list="menus" id="menu" name="menu" placeholder="Select menu" autocomplete="off" onkeydown="return false">
+              <input list="menus" id="menu" name="menu" placeholder="Select menu" autocomplete="off">
             </section>
             <input list="rando" id="food" name="bagNum" placeholder="Enter number of bags" autocomplete="off">
             <section class="submission">
