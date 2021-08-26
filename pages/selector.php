@@ -7,6 +7,17 @@ if (isset($_POST['delete'])) {
   $deleteSql = "DELETE FROM items WHERE identifier='" . $_POST['hiddenText'] . "'";
   $deleteResult = mysqli_query($conn, $deleteSql);
 }
+
+$nutFree = false;
+$veg = false;
+$halal = false;
+$baby = false;
+if (isset($_POST['foodSearch'])) {
+  if (isset($_POST['nut-free'])) $nutFree = true;
+  if (isset($_POST['vegetarian'])) $veg = true;
+  if (isset($_POST['halal'])) $halal = true;
+  if (isset($_POST['baby'])) $baby = true;
+}
 ?>
 
 <!DOCTYPE html>
@@ -51,6 +62,16 @@ if (isset($_POST['delete'])) {
             <div class="search-bar">
               <input list="foods" id="foodSearch" name="foodSearch" placeholder="Search here">
             </div>
+            <div class="filter-items">
+              <input type="checkbox" name="nut-free" id="nut-free">
+              <label for="nut-free"> Nut-Free </label>
+              <input type="checkbox" name="vegetarian" id="vegetarian">
+              <label for="vegetarian"> Vegetarian </label>
+              <input type="checkbox" name="halal" id="halal">
+              <label for="halal"> Halal </label>
+              <input type="checkbox" name="baby" id="baby">
+              <label for="baby"> Baby </label>
+            </div>
           </form>
         </div>
         <div class="flex">
@@ -89,6 +110,12 @@ if (isset($_POST['delete'])) {
                 echo "</tr>";
               } else {
                 while ($row = mysqli_fetch_assoc($result)) {
+                  if ($nutFree && !$row['containsNuts']) continue;
+                  if ($veg && !$row['isVegetarian']) continue;
+                  if ($halal && !$row['isHalal']) continue;
+                  if ($baby && !$row['isBaby']) continue;
+
+
                   echo "<tr>";
                   echo "<td class='item'>" . $row['identifier'] . "</td>";
                   echo "<td>";
