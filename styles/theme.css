@@ -338,15 +338,15 @@ a {
   cursor: pointer;
 }
 
-.flex form .search-bar{
+/*.flex form*/ .search-bar{
   background-color: hsl(217, 40%, 96%); 
   padding: 20px 20px;
-  width: 1500px;
+  width: 960px;
 }
 
-.flex form .search-bar input {
+/*.flex form*/ .search-bar input {
   width: 100%;
-  height: 30px;
+  height: 30px; 
 }
 
 .flex form {
