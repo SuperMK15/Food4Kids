@@ -29,7 +29,10 @@ if (isset($_POST['stockSubmit'])) {
 }
 $menuName = "";
 if (isset($_POST['menu-type-num-submit'])) {
-  if (isset($_POST['menu']) && strlen(trim($_POST['menu'])) != 0) {
+  $validationText = "SELECT * FROM menus WHERE menuName='" . $_POST['menu'] . "'";
+  $validationQuery = mysqli_query($conn, $validationText);
+
+  if (isset($_POST['menu']) && mysqli_num_rows($validationQuery) != 0) {
     $findID = "SELECT * FROM menus WHERE menuName='" . $_POST['menu'] . "'";
     $findIDQuery = mysqli_query($conn, $findID);
     $findIDrow = mysqli_fetch_assoc($findIDQuery);
@@ -101,7 +104,7 @@ $tPrice = 0.00;
             <section class="menu-type">
               <datalist id="menus">
                 <?php 
-                  if (!isset($_POST['menu'])) {
+                  if (!isset($_POST['menu']) || mysqli_num_rows($validationQuery) == 0) {
                     $sql = "SELECT * FROM menus WHERE menuName LIKE '%" . $_POST['menu'] . "%'";
                     $result = mysqli_query($conn, $sql);
                     if (mysqli_num_rows($result) != 0) {
