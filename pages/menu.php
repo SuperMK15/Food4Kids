@@ -85,28 +85,32 @@ if (isset($_POST['loadMenus'])) {
                   <input type="submit" id="loadMenus" name="loadMenus" value="Load Menus" class="button">
                 </form>
               </section>
-          <?php
-          if ($menuIDs[1] != 0) {
-            $text = "SELECT * FROM menus WHERE basketID='" . $menuIDs[1] . "'";
-            $query = mysqli_query($conn, $text);
-            $menuResult = mysqli_fetch_assoc($query);
+              <?php
+              if ($menuIDs[1] != 0) {
+                $text = "SELECT * FROM menus WHERE basketID='" . $menuIDs[1] . "'";
+                $query = mysqli_query($conn, $text);
+                $menuResult = mysqli_fetch_assoc($query);
 
-            echo "<tr>";
-            echo "<td>" . $menuResult['menuName'] . "</td>";
-            echo "</tr>";
-
-            for ($x = 1; $x <= 25; $x++) {
-              $textI = "SELECT * FROM items WHERE itemID =" . $menuResult['itemID' . $x];
-              $queryI = mysqli_query($conn, $textI);
-              if (mysqli_num_rows($queryI) != 0) {
-                $itemResult = mysqli_fetch_assoc($queryI);
                 echo "<tr>";
-                echo "<td class='BLUE'>" . $itemResult['identifier'] . "</td>";
+                echo "<td>" . $menuResult['menuName'] . "</td>";
+                echo "</tr>";
+
+                for ($x = 1; $x <= 25; $x++) {
+                  $textI = "SELECT * FROM items WHERE itemID =" . $menuResult['itemID' . $x];
+                  $queryI = mysqli_query($conn, $textI);
+                  if (mysqli_num_rows($queryI) != 0) {
+                    $itemResult = mysqli_fetch_assoc($queryI);
+                    echo "<tr>";
+                    echo "<td class='BLUE'>" . $itemResult['identifier'] . "</td>";
+                    echo "</tr>";
+                  }
+                }
+              } else {
+                echo "<tr>";
+                echo "<td> EMPTY </td>";
                 echo "</tr>";
               }
-            }
-          }
-          ?>
+              ?>
         </table>
         <table class="finalMenu">
           <?php
@@ -129,6 +133,10 @@ if (isset($_POST['loadMenus'])) {
                 echo "</tr>";
               }
             }
+          } else {
+            echo "<tr>";
+            echo "<td> EMPTY </td>";
+            echo "</tr>";
           }
           ?>
         </table>
@@ -153,6 +161,10 @@ if (isset($_POST['loadMenus'])) {
                 echo "</tr>";
               }
             }
+          } else {
+            echo "<tr>";
+            echo "<td> EMPTY </td>";
+            echo "</tr>";
           }
           ?>
         </table>
@@ -177,6 +189,10 @@ if (isset($_POST['loadMenus'])) {
                 echo "</tr>";
               }
             }
+          } else {
+            echo "<tr>";
+            echo "<td> EMPTY </td>";
+            echo "</tr>";
           }
           ?>
         </table>
@@ -201,6 +217,10 @@ if (isset($_POST['loadMenus'])) {
                 echo "</tr>";
               }
             }
+          } else {
+            echo "<tr>";
+            echo "<td> EMPTY </td>";
+            echo "</tr>";
           }
           ?>
         </table>
