@@ -73,7 +73,7 @@ if (isset($_POST['addSubmit'])) {
 
   <main>
     <div class="calc1">
-      <h1>Menu Creator</h1>
+      <h1>Add Menu</h1>
       <div class="flex">
         <div class="selection-form">
           <div class="select-menu">
