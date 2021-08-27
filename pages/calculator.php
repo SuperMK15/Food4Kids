@@ -90,25 +90,25 @@ $recommendedVals = mysqli_fetch_array($pullRecommededValsQuery);
       <h1>Menu Creator</h1>
       <div class="flex">
         <div class="selection-form">
-        <section class="submission">
-          <form method="post" action="../pages/addMenu.php">
-            <input type="submit" id="addMenu" name="addMenu" value="Add Menu" class="button">
-          </form>
+          <section class="submission">
+            <form method="post" action="../pages/addMenu.php">
+              <input type="submit" id="addMenu" name="addMenu" value="Add Menu" class="button">
+            </form>
           </section>
           <form method="post" action="../pages/calculator.php">
             <section class="menu-type">
               <datalist id="menus">
-                <?php 
-                  if (!isset($_POST['menu']) || mysqli_num_rows($validationQuery) == 0) {
-                    $sql = "SELECT * FROM menus WHERE menuName LIKE '%" . $_POST['menu'] . "%'";
-                    $result = mysqli_query($conn, $sql);
-                    if (mysqli_num_rows($result) != 0) {
-                      while ($row = mysqli_fetch_assoc($result)) {
-                        echo "<option value='" . $row['menuName'] . "'></option>";
-                        $counter++;
-                      }
+                <?php
+                if (!isset($_POST['menu']) || mysqli_num_rows($validationQuery) == 0) {
+                  $sql = "SELECT * FROM menus WHERE menuName LIKE '%" . $_POST['menu'] . "%'";
+                  $result = mysqli_query($conn, $sql);
+                  if (mysqli_num_rows($result) != 0) {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                      echo "<option value='" . $row['menuName'] . "'></option>";
+                      $counter++;
                     }
                   }
+                }
                 ?>
               </datalist>
               <input list="menus" id="menu" name="menu" placeholder="Select menu" autocomplete="off">
@@ -225,7 +225,7 @@ $recommendedVals = mysqli_fetch_array($pullRecommededValsQuery);
             $setColour = true;
             if ($pullingMenuCode == "") {
               echo "<tr>";
-              for($i = 0; $i < 14; $i++) echo "<td>Empty</td>";
+              for ($i = 0; $i < 14; $i++) echo "<td>Empty</td>";
               echo "</tr>";
               $setColour = false;
             } else {
@@ -279,16 +279,23 @@ $recommendedVals = mysqli_fetch_array($pullRecommededValsQuery);
             <tr>
               <th class="textWHITE">Total</th>
               <?php
-              for($i = 0; $i < 12; $i++) {
+              for ($i = 0; $i < 12; $i++) {
                 $lowerBound = 0.8;
                 $upperBound = 1.2;
 
-                if($i == 11) $lowerBound = -1;
+                if ($i == 11) $lowerBound = -1;
 
-                if ($totalVals[$i] < ($recommendedVals[$i+1]*$lowerBound) && $setColour) echo '<th class="textRED">' . $totalVals[$i] . '</th>';
-                else if ($totalVals[$i] > ($recommendedVals[$i+1]*$upperBound) && $setColour) echo '<th class="textYELLOW">' . $totalVals[$i] . '</th>';
+                if ($totalVals[$i] < ($recommendedVals[$i + 1] * $lowerBound) && $setColour) echo '<th class="textRED">' . $totalVals[$i] . '</th>';
+                else if ($totalVals[$i] > ($recommendedVals[$i + 1] * $upperBound) && $setColour) echo '<th class="textYELLOW">' . $totalVals[$i] . '</th>';
                 else echo '<th class="textWHITE">' . $totalVals[$i] . '</th>';
               }
+              echo '<th></th>';
+              ?>
+            </tr>
+            <tr>
+              <th class="textWHITE">Recommended</th>
+              <?php
+              for ($i = 1; $i <= 12; $i++) echo '<th class="textWHITE">' . $recommendedVals[$i] . '</th>';
               echo '<th></th>';
               ?>
             </tr>

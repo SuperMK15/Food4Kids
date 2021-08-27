@@ -41,6 +41,10 @@ if (isset($_POST['addSubmit'])) {
   }
 }
 
+
+$pullRecommededValsText = "SELECT * FROM recommendedvals WHERE valsID = 1";
+$pullRecommededValsQuery = mysqli_query($conn, $pullRecommededValsText);
+$recommendedVals = mysqli_fetch_array($pullRecommededValsQuery);
 ?>
 
 <!DOCTYPE html>
@@ -159,6 +163,13 @@ if (isset($_POST['addSubmit'])) {
               <th>Total</th>
               <?php for($i = 0; $i < 12; $i++) echo "<th>0</th>"; ?>
               <th></th>
+            </tr>
+            <tr>
+              <th class="textWHITE">Recommended</th>
+              <?php
+              for ($i = 1; $i <= 12; $i++) echo '<th class="textWHITE">' . $recommendedVals[$i] . '</th>';
+              echo '<th></th>';
+              ?>
             </tr>
           </table>
         </div>
