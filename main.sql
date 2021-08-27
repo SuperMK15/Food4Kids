@@ -131,7 +131,7 @@ INSERT INTO Items(identifier, calories, protein, calcium, iron, vitaminA, vitami
         ('Kind Protein Bars', 200, 5, 4, 10, 0, 0, 17, 140, 5, 0, 15, 1, 1, 1, 0, 1.39, 50),
         ('Mini Wheats cereals', 200, 5, 2, 15, 0, 0, 46, 0, 11, 0, 1, 1, 1, 1, 1, 4.97, 50),
         ('Banana', 135, 1, 7, 0, 4, 13, 34, 1, 18, 0, 0, 1, 1, 1, 1, 0.28, 50),
-        ('Applesauce (113g)', 50, 0.3, 0, 0, 0, 45, 14, 0, 11, 0, 0, 1, 1, 1, 1, 0.66, 50)
+        ('Applesauce (113g)', 50, 0.3, 0, 0, 0, 45, 14, 0, 11, 0, 0, 1, 1, 1, 1, 0.66, 50);
 
 INSERT INTO recommendedVals(valsID, calories, protein, calcium, iron, vitaminA, vitaminC, carbs, sodium, sugar, artSugar, fat, cost)
   VALUES (1, 1500, 50, 100, 100, 100, 100, 275, 3400, 30, 30, 61, 10);
