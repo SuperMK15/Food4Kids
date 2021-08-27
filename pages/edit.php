@@ -5,56 +5,63 @@ if (isset($_POST['edit'])) {
   $editQuery = mysqli_query($conn, $editSelect);
 }
 
+$triedToHack = false;
 $failedEntry = false;
 if (isset($_POST['editSubmit'])) {
-  $checkForRepeat = "SELECT * FROM items WHERE identifier='" . $_POST['updateIdentifier'] . "'";
-  $repeatQuery = mysqli_query($conn, $checkForRepeat);
-  $repeatQueryVal = mysqli_fetch_assoc($repeatQuery);
-
-  if (mysqli_num_rows($repeatQuery) >= 1 && $repeatQueryVal['itemID'] != $_POST['itemID']) {
+  if (str_contains($_POST['updateIdentifier'], "'") || str_contains($_POST['updateIdentifier'], "\"")) {
+    $triedToHack = true;
     $editSelect = "SELECT * FROM items WHERE identifier='" . $_POST['failedEditText'] . "'";
     $editQuery = mysqli_query($conn, $editSelect);
-    $failedEntry = true;
-    $failedEntryName = $_POST['failedEditText'];
   } else {
-    $uIdentifier = $_POST['updateIdentifier'];
-    $ucalories = $_POST['calories'];
-    $uprotein = $_POST['protein'];
-    $ucalcium = $_POST['calcium'];
-    $uiron = $_POST['iron'];
-    $uvitaminA = $_POST['vitamina'];
-    $uvitaminC = $_POST['vitaminc'];
-    $ucarbohydrates = $_POST['carbs'];
-    $usodium = $_POST['sodium'];
-    $usugar = $_POST['sugar'];
-    $uartsugar = $_POST['artSugar'];
-    $ufat = $_POST['fat'];
-    $ucalories = $_POST['calories'];
-    $ustock = $_POST['stock'];
-    $ucost = $_POST['cost'];
-    $uID = $_POST['itemID'];
+    $checkForRepeat = "SELECT * FROM items WHERE identifier='" . $_POST['updateIdentifier'] . "'";
+    $repeatQuery = mysqli_query($conn, $checkForRepeat);
+    $repeatQueryVal = mysqli_fetch_assoc($repeatQuery);
 
-    $isNutFree = 0;
-    $isVeg = 0;
-    $isHalal = 0;
-    $isBaby = 0;
-    if (isset($_POST['nut-free'])) {
-      $isNutFree = 1;
-    }
-    if (isset($_POST['halal'])) {
-      $isHalal = 1;
-    }
-    if (isset($_POST['vegetarian'])) {
-      $isVeg = 1;
-    }
-    if (isset($_POST['baby'])) {
-      $isBaby = 1;
-    }
-    $updateSelect = "UPDATE items SET identifier='$uIdentifier', calories=$ucalories, protein=$uprotein, calcium=$ucalcium, iron=$uiron, vitaminA=$uvitaminA, vitaminC=$uvitaminC, sodium=$usodium, sugar=$usugar, artSugar=$uartsugar, fat=$ufat, calories=$ucalories, stock=$ustock, price=$ucost, containsNuts=$isNutFree, isVegetarian=$isVeg, isHalal=$isHalal, isBaby=$isBaby WHERE itemID = $uID";
-    $updateQuery = mysqli_query($conn, $updateSelect);
+    if (mysqli_num_rows($repeatQuery) >= 1 && $repeatQueryVal['itemID'] != $_POST['itemID']) {
+      $editSelect = "SELECT * FROM items WHERE identifier='" . $_POST['failedEditText'] . "'";
+      $editQuery = mysqli_query($conn, $editSelect);
+      $failedEntry = true;
+      $failedEntryName = $_POST['failedEditText'];
+    } else {
+      $uIdentifier = $_POST['updateIdentifier'];
+      $ucalories = $_POST['calories'];
+      $uprotein = $_POST['protein'];
+      $ucalcium = $_POST['calcium'];
+      $uiron = $_POST['iron'];
+      $uvitaminA = $_POST['vitamina'];
+      $uvitaminC = $_POST['vitaminc'];
+      $ucarbohydrates = $_POST['carbs'];
+      $usodium = $_POST['sodium'];
+      $usugar = $_POST['sugar'];
+      $uartsugar = $_POST['artSugar'];
+      $ufat = $_POST['fat'];
+      $ucalories = $_POST['calories'];
+      $ustock = $_POST['stock'];
+      $ucost = $_POST['cost'];
+      $uID = $_POST['itemID'];
 
-    header("Location: ./selector.php");
-    exit();
+      $isNutFree = 0;
+      $isVeg = 0;
+      $isHalal = 0;
+      $isBaby = 0;
+      if (isset($_POST['nut-free'])) {
+        $isNutFree = 1;
+      }
+      if (isset($_POST['halal'])) {
+        $isHalal = 1;
+      }
+      if (isset($_POST['vegetarian'])) {
+        $isVeg = 1;
+      }
+      if (isset($_POST['baby'])) {
+        $isBaby = 1;
+      }
+      $updateSelect = "UPDATE items SET identifier='$uIdentifier', calories=$ucalories, protein=$uprotein, calcium=$ucalcium, iron=$uiron, vitaminA=$uvitaminA, vitaminC=$uvitaminC, sodium=$usodium, sugar=$usugar, artSugar=$uartsugar, fat=$ufat, calories=$ucalories, stock=$ustock, price=$ucost, containsNuts=$isNutFree, isVegetarian=$isVeg, isHalal=$isHalal, isBaby=$isBaby WHERE itemID = $uID";
+      $updateQuery = mysqli_query($conn, $updateSelect);
+
+      header("Location: ./selector.php");
+      exit();
+    }
   }
 }
 ?>
@@ -141,15 +148,16 @@ if (isset($_POST['editSubmit'])) {
         </div>
         <section class="attribute-type">
           <?php
-          if ($failedEntry) {
+          if ($failedEntry || $triedToHack) {
             $editSelect = "SELECT * FROM items WHERE identifier='" . $_POST['failedEditText'] . "'";
             $editQuery = mysqli_query($conn, $editSelect);
             $editRow = mysqli_fetch_assoc($editQuery);
-          } else {
+          } else if (!$triedToHack) {
             $editSelect = "SELECT * FROM items WHERE identifier='" . $_POST['hiddenText'] . "'";
             $editQuery = mysqli_query($conn, $editSelect);
             $editRow = mysqli_fetch_assoc($editQuery);
           }
+
           if ($editRow['containsNuts'] == 1) {
             echo '<input type="checkbox" name="nut-free" id="nut-free" checked>';
             echo '<label for="nut-free"> Nut-Free </label>';
@@ -178,15 +186,21 @@ if (isset($_POST['editSubmit'])) {
             echo '<input type="checkbox" name="baby" id="Baby">';
             echo '<label for="Baby"> Baby </label>';
           }
+
           ?>
         </section>
         <section class="submission2">
           <input type="submit" value="Update" class="button" name="editSubmit">
           <?php
-          echo '<input type="hidden" value="' . $editRow['identifier'] . '" class="button" id="failedEdit" name="failedEditText">';
           if ($failedEntry) {
             echo "<h3> </h3><br>";
             echo "<h3>Error: The item name \"" . $_POST['updateIdentifier'] . "\" is already in use!</h3>";
+          }
+
+          if ($triedToHack) {
+            echo "<h3>Error: The Symbols ' and \" are not Allowed in Item Names!</h3>";
+          } else {
+            echo '<input type="hidden" value="' . $editRow['identifier'] . '" class="button" id="failedEdit" name="failedEditText">';
           }
           ?>
         </section>

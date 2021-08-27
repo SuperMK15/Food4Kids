@@ -4,7 +4,12 @@ include_once 'connector.php';
 $leftBlank = false;
 $repeatedName = false;
 
-if (isset($_POST['addSubmit'])) {
+$triedToHack = false;
+if (str_contains($_POST['newMenuName'], "'") || str_contains($_POST['newMenuName'], "\"")) {
+  $triedToHack = true;
+}
+
+if (isset($_POST['addSubmit']) && !str_contains($_POST['newMenuName'], "'") && !str_contains($_POST['newMenuName'], "\"")) {
   $checkForRepeatText = "SELECT basketID FROM menus WHERE menuName='" . $_POST['newMenuName'] . "'";
   $checkForRepeatQuery = mysqli_query($conn, $checkForRepeatText);
 
@@ -84,16 +89,20 @@ $recommendedVals = mysqli_fetch_array($pullRecommededValsQuery);
             <form method="post">
               <p>Type Menu Name:</p>
               <?php
-              if($repeatedName) {
+              if ($repeatedName) {
                 echo '<input type="text" id="food" name="newMenuName" value="' . $repeatedNameDisplay . '" autocomplete="off">';
-              } 
-              else {
+              } else {
                 echo '<input type="text" id="food" name="newMenuName" placeholder="Menu Name" autocomplete="off">';
               }
+
               if ($leftBlank) {
                 echo "<h5>Error: Please Do Not Leave Menu Name Blank!</h5>";
               } else if ($repeatedName) {
                 echo "<h5>Error: The Name \"" . $repeatedNameDisplay . "\" Has Already Been Used!</h5>";
+              }
+
+              if($triedToHack) {
+                echo "<h5>Error: The Symbols ' and \" are not Allowed in Menu Names!</h5>";
               }
               ?>
               <p>Items</p>
@@ -140,7 +149,7 @@ $recommendedVals = mysqli_fetch_array($pullRecommededValsQuery);
         </div>
         <div class="calc-table">
           <table>
-            <tr class = "textWHITE">
+            <tr class="textWHITE">
               <th>Item</th>
               <th>Calories (#)</th>
               <th>Protein (g)</th>
@@ -157,11 +166,11 @@ $recommendedVals = mysqli_fetch_array($pullRecommededValsQuery);
               <th>Amount Needed</th>
             </tr>
             <tr>
-              <?php for($i = 0; $i < 14; $i++) echo "<td>Empty</td>"; ?>
+              <?php for ($i = 0; $i < 14; $i++) echo "<td>Empty</td>"; ?>
             </tr>
-            <tr class = "textWHITE">
+            <tr class="textWHITE">
               <th>Total</th>
-              <?php for($i = 0; $i < 12; $i++) echo "<th>0</th>"; ?>
+              <?php for ($i = 0; $i < 12; $i++) echo "<th>0</th>"; ?>
               <th></th>
             </tr>
             <tr>

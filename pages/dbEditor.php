@@ -86,33 +86,38 @@ include_once 'connector.php';
         <section class="submission2">
           <input type="submit" value="Update" class="button" id="update" name="update">
           <?php
+          $tempName = "";
           if (isset($_POST['update'])) {
-            $isNutFree = 0;
-            $isVeg = 0;
-            $isHalal = 0;
-            $isBaby = 0;
-            if (isset($_POST['nut-free'])) {
-              $isNutFree = 1;
-            }
-            if (isset($_POST['halal'])) {
-              $isHalal = 1;
-            }
-            if (isset($_POST['vegetarian'])) {
-              $isVeg = 1;
-            }
-            if (isset($_POST['baby'])) {
-              $isBaby = 1;
-            }
-
-            $checkForRepeat = "SELECT itemID FROM items WHERE identifier='" . $_POST['identifier'] . "'";
-            $repeatQuery = mysqli_query($conn, $checkForRepeat);
-
-            if (mysqli_num_rows($repeatQuery) == 0) {
-              $addTo = "INSERT INTO items (identifier, calories, protein, calcium, iron, vitaminA, vitaminC, carbohydrates, sodium, sugar, artSugar, fat, containsNuts, isVegetarian, isHalal, isBaby, price, stock) VALUES ('" . $_POST['identifier'] . "', " . $_POST['calories'] . ", " . $_POST['protein'] . ", " . $_POST['calcium'] . ", " . $_POST['iron'] . ", " . $_POST['vitamina'] . ", " . $_POST['vitaminc'] . ", " . $_POST['carbs'] . ", " . $_POST['sodium'] . ", " . $_POST['sugar'] . ", " . $_POST['artsugar'] . ", " . $_POST['fat'] . ", $isNutFree, $isVeg, $isHalal, $isBaby, " . $_POST['cost'] . ", " . $_POST['stock'] . ")";
-              $result = mysqli_query($conn, $addTo);
+            if (str_contains($_POST['identifier'], "'") || str_contains($_POST['identifier'], "\"")) {
+              echo "<h3>Error: The Symbols ' and \" are not Allowed in Item Names!</h3>";
             } else {
-              echo "<h3> </h3><br>";
-              echo "<h3>Error: The item name \"" . $_POST['identifier'] . "\" is already in use!</h3>";
+              $isNutFree = 0;
+              $isVeg = 0;
+              $isHalal = 0;
+              $isBaby = 0;
+              if (isset($_POST['nut-free'])) {
+                $isNutFree = 1;
+              }
+              if (isset($_POST['halal'])) {
+                $isHalal = 1;
+              }
+              if (isset($_POST['vegetarian'])) {
+                $isVeg = 1;
+              }
+              if (isset($_POST['baby'])) {
+                $isBaby = 1;
+              }
+
+              $checkForRepeat = "SELECT itemID FROM items WHERE identifier='" . $_POST['identifier'] . "'";
+              $repeatQuery = mysqli_query($conn, $checkForRepeat);
+
+              if (mysqli_num_rows($repeatQuery) == 0) {
+                $addTo = "INSERT INTO items (identifier, calories, protein, calcium, iron, vitaminA, vitaminC, carbohydrates, sodium, sugar, artSugar, fat, containsNuts, isVegetarian, isHalal, isBaby, price, stock) VALUES ('" . $_POST['identifier'] . "', " . $_POST['calories'] . ", " . $_POST['protein'] . ", " . $_POST['calcium'] . ", " . $_POST['iron'] . ", " . $_POST['vitamina'] . ", " . $_POST['vitaminc'] . ", " . $_POST['carbs'] . ", " . $_POST['sodium'] . ", " . $_POST['sugar'] . ", " . $_POST['artsugar'] . ", " . $_POST['fat'] . ", $isNutFree, $isVeg, $isHalal, $isBaby, " . $_POST['cost'] . ", " . $_POST['stock'] . ")";
+                $result = mysqli_query($conn, $addTo);
+              } else {
+                echo "<h3> </h3><br>";
+                echo "<h3>Error: The item name \"" . $_POST['identifier'] . "\" is already in use!</h3>";
+              }
             }
           }
           ?>

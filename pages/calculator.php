@@ -231,8 +231,11 @@ $recommendedVals = mysqli_fetch_array($pullRecommededValsQuery);
             } else {
               $pullingMenuQuery = mysqli_query($conn, $pullingMenuCode);
               $row = mysqli_fetch_assoc($pullingMenuQuery);
+
+              $foundItem = false;
               for ($x = 1; $x <= 25; $x++) {
                 if ($row['itemID' . $x] != 0) {
+                  $foundItem = true;
                   $mitemID = $row['itemID' . $x];
                   $itemQuery = "SELECT * FROM items WHERE itemID = $mitemID";
                   $itemResult = mysqli_query($conn, $itemQuery);
@@ -274,6 +277,13 @@ $recommendedVals = mysqli_fetch_array($pullRecommededValsQuery);
                   }
                 }
               }
+            }
+
+            if (!$foundItem && $pullingMenuCode != "") {
+              echo "<tr>";
+              for ($i = 0; $i < 14; $i++) echo "<td>Empty</td>";
+              echo "</tr>";
+              $setColour = false;
             }
             ?>
             <tr>
