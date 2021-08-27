@@ -60,6 +60,22 @@ CREATE TABLE Menus (
   PRIMARY KEY (basketID)
 );
 
+CREATE TABLE recommendedVals (
+  valsID INT,
+  calories DECIMAL(10, 2),
+  protein DECIMAL(10, 2),
+  calcium DECIMAL(10, 2),
+  iron DECIMAL(10, 2),
+  vitaminA DECIMAL(10, 2),
+  vitaminC DECIMAL(10, 2),
+  carbs DECIMAL(10, 2),
+  sodium DECIMAL(10, 2),
+  sugar DECIMAL(10, 2),
+  artSugar DECIMAL(10, 2),
+  fat DECIMAL(10, 2),
+  cost DECIMAL(10. 2)
+)
+
 INSERT INTO Items(identifier, calories, protein, calcium, iron, vitaminA, vitaminC, carbohydrates, sodium, sugar, artSugar, fat, containsNuts, isVegetarian, isHalal, isBaby, price, stock)
   VALUES
          ('Canned Stuffed Eggplant (400g)', 125, 1, 0, 0, 0, 0, 14, 1, 0, 0, 7, 0, 1, 1, 1, 4.19, 50),
