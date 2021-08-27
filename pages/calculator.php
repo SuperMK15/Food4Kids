@@ -3,7 +3,7 @@ include_once 'connector.php';
 $pullingMenuCode = "";
 $menuNumber = 0;
 $amountNeeded = 0;
-
+$foundItem = false;
 if (isset($_POST['deleteMenu'])) {
   $deleteMenuText = "DELETE FROM menus WHERE basketID =" . $_POST['menuNumber'];
   $deleteQuery = mysqli_query($conn, $deleteMenuText);
