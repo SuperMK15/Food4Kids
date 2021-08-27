@@ -192,12 +192,15 @@ $tPrice = 0.00;
             <?php
             if ($menuNumber != 0) {
               echo '<form method="post" action="../pages/calculator.php">';
-              echo '<section class="submission">';
               echo '<input type="hidden" name="menuNumber" value="' . $menuNumber . '" >';
               echo '<input type="hidden" name="amountNeeded" value="' . $amountNeeded . '" >';
+              echo '<section class="submission3">';
+              echo '<div class="stockSubmitP">';
               echo '<input type="submit" value="Clear Stock" class="button" name="stockSubmit">';
-              echo '<br><br><br>';
+              echo '</div>';
+              echo '<div class="deleteMenuP">';
               echo '<input type="submit" value="Delete Menu" class="button" name="deleteMenu">';
+              echo '</div>';
               echo '</section>';
               echo '</form>';
             }
@@ -207,7 +210,7 @@ $tPrice = 0.00;
         </div>
         <div class="calc-table">
           <table>
-            <tr>
+            <tr class="textWHITE">
               <th>Item</th>
               <th>Calories (#)</th>
               <th>Protein (g)</th>
@@ -277,21 +280,27 @@ $tPrice = 0.00;
             }
             ?>
             <tr>
-              <th>Total</th>
+              <th class="textWHITE">Total</th>
               <?php
-              echo "<th>$tCalories</th>";
-              echo "<th>$tProtein</th>";
-              echo "<th>$tCalcium</th>";
-              echo "<th>$tIron</th>";
-              echo "<th>$tvitaminA</th>";
-              echo "<th>$tvitaminC</th>";
-              echo "<th>$tCarbohydrates</th>";
-              echo "<th>$tSodium</th>";
-              echo "<th>$tSugar</th>";
-              echo "<th>$tArtSugar</th>";
-              echo "<th>$tFat</th>";
-              echo "<th>$tPrice</th>";
-              echo "<th></th>";
+                if ($tCalories < 1000) {
+                  echo '<th class="textRED">' . $tCalories . '</th>';
+                } else if ($tCalories > 2000) {
+                  echo '<th class="textYELLOW">' . $tCalories . '</th>';
+                } else {
+                  echo '<th class="textWHITE">' . $tCalories . '</th>';
+                }
+              echo '<th class="textWHITE">' . $tProtein . '</th>';
+              echo '<th>' . $tCalcium . '</th>';
+              echo '<th>' . $tIron . '</th>';
+              echo '<th>' . $tvitaminA . '</th>';
+              echo '<th>' . $tvitaminC . '</th>';
+              echo '<th>' . $tCarbohydrates . '</th>';
+              echo '<th>' . $tSodium . '</th>';
+              echo '<th>' . $tSugar . '</th>';
+              echo '<th>' . $tArtSugar . '</th>';
+              echo '<th>' . $tFat . '</th>';
+              echo '<th>' . $tPrice . '</th>';
+              echo '<th></th>';
               ?>
             </tr>
           </table>

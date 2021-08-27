@@ -59,18 +59,20 @@ if (isset($_POST['foodSearch'])) {
             </section>
           </form>
           <form method="post" action="">
-            <div class="search-bar">
-              <input list="foods" id="foodSearch" name="foodSearch" placeholder="Search here">
-            </div>
-            <div class="filter-items">
-              <input type="checkbox" name="nut-free" id="nut-free">
-              <label for="nut-free"> Nut-Free </label>
-              <input type="checkbox" name="vegetarian" id="vegetarian">
-              <label for="vegetarian"> Vegetarian </label>
-              <input type="checkbox" name="halal" id="halal">
-              <label for="halal"> Halal </label>
-              <input type="checkbox" name="baby" id="baby">
-              <label for="baby"> Baby </label>
+            <div class="flex">
+              <div class="search-bar">
+                <input list="foods" id="foodSearch" name="foodSearch" placeholder="Search here">
+              </div>
+              <div class="filter-items">
+                <input type="checkbox" name="nut-free" id="nut-free">
+                <label for="nut-free"> Nut-Free </label>
+                <input type="checkbox" name="vegetarian" id="vegetarian">
+                <label for="vegetarian"> Vegetarian </label>
+                <input type="checkbox" name="halal" id="halal">
+                <label for="halal"> Halal </label>
+                <input type="checkbox" name="baby" id="baby">
+                <label for="baby"> Baby </label>
+              </div>
             </div>
           </form>
         </div>

@@ -87,13 +87,10 @@ if (isset($_POST['addSubmit'])) {
                 echo '<input type="text" id="food" name="newMenuName" placeholder="Menu Name" autocomplete="off">';
               }
               if ($leftBlank) {
-                echo "<h5> </h5><br>";
                 echo "<h5>Error: Please Do Not Leave Menu Name Blank!</h5>";
               } else if ($repeatedName) {
-                echo "<h5> </h5><br>";
                 echo "<h5>Error: The Name \"" . $repeatedNameDisplay . "\" Has Already Been Used!</h5>";
               }
-              echo "<h5> </h5><br>";
               ?>
               <p>Items</p>
           </div>
@@ -119,7 +116,7 @@ if (isset($_POST['addSubmit'])) {
                 echo '<input list="foods" id="food" name="item' . $x . '" placeholder="Select item" value="' . $items[$x] . '">';
                 echo "</li>";
               }
-              echo '<section class="submission">';
+              echo '<section class="submission4">';
               echo '<input type="submit" value="Add" class="button" name="addSubmit">';
               echo '</section>';
             } else {
@@ -129,7 +126,7 @@ if (isset($_POST['addSubmit'])) {
                 echo '<input list="foods" id="food" name="item' . $x . '" placeholder="Select item" value="' . $itemIdentifier . '">';
                 echo "</li>";
               }
-              echo '<section class="submission">';
+              echo '<section class="submission4">';
               echo '<input type="submit" value="Add" class="button" name="addSubmit">';
               echo '</section>';
             }

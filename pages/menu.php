@@ -52,8 +52,6 @@ if (isset($_POST['loadMenus'])) {
       <div class="flex">
         <table class="finalMenu">
           <div class="selection-form">
-            <section class="submission">
-            </section>
             <form method="post" action="../pages/menu.php">
               <section class="menu-type">
                 <datalist id="menus">
@@ -70,20 +68,19 @@ if (isset($_POST['loadMenus'])) {
                   }
                   ?>
                 </datalist>
-                <h3>Menu Selection</h3><br>
-                <input list="menus" id="menu1" name="menu1" placeholder="Select menu" autocomplete="off">
-                <h3></h3><br>
-                <input list="menus" id="menu2" name="menu2" placeholder="Select menu" autocomplete="off">
-                <h3></h3><br>
-                <input list="menus" id="menu3" name="menu3" placeholder="Select menu" autocomplete="off">
-                <h3></h3><br>
-                <input list="menus" id="menu4" name="menu4" placeholder="Select menu" autocomplete="off">
-                <h3></h3><br>
-                <input list="menus" id="menu5" name="menu5" placeholder="Select menu" autocomplete="off">
-                <h3></h3><br>
+                <h3>Menu Selection</h3>
+                <ul>
+                  <li><input list="menus" id="menu1" name="menu1" placeholder="Select menu" autocomplete="off"></li>
+                  <li><input list="menus" id="menu2" name="menu2" placeholder="Select menu" autocomplete="off"></li>
+                  <li><input list="menus" id="menu3" name="menu3" placeholder="Select menu" autocomplete="off"></li>
+                  <li><input list="menus" id="menu4" name="menu4" placeholder="Select menu" autocomplete="off"></li>
+                  <li><input list="menus" id="menu5" name="menu5" placeholder="Select menu" autocomplete="off"></li>
+                <ul>
+                <div class="the-thing-that-gets-clicked-lol">
                 <form method="post" action="../pages/addMenu.php">
                   <input type="submit" id="loadMenus" name="loadMenus" value="Load Menus" class="button">
                 </form>
+                </div>
               </section>
               <?php
               if ($menuIDs[1] != 0) {
@@ -107,7 +104,7 @@ if (isset($_POST['loadMenus'])) {
                 }
               } else {
                 echo "<tr>";
-                echo "<td> EMPTY </td>";
+                echo "<td>EMPTY</td>";
                 echo "</tr>";
               }
               ?>
