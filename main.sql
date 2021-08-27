@@ -131,11 +131,6 @@ INSERT INTO Items(identifier, calories, protein, calcium, iron, vitaminA, vitami
         ('Kind Protein Bars', 200, 5, 4, 10, 0, 0, 17, 140, 5, 0, 15, 0, 1, 1, 0, 1.39, 50),
         ('Mini Wheats Cereals', 200, 5, 2, 15, 0, 0, 46, 0, 11, 0, 1, 0, 1, 1, 1, 4.97, 50),
         ('Banana', 135, 1, 7, 0, 4, 13, 34, 1, 18, 0, 0, 0, 1, 1, 1, 0.28, 50);
-        
-INSERT INTO Menus(itemID1, itemID2, itemID3, itemID4, itemID5, itemID6, itemID7, itemID8, itemID9, itemID10, itemID11, itemID12, itemID13, itemID14, itemID15, itemID16, itemID17, itemID18, itemID19, itemID20, itemID21, itemID22, itemID23, itemID24, itemID25)
-  VALUES
-    (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-    (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-    (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-    (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-    (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+INSERT INTO recommendedVals(valsID, calories, protein, calcium, iron, vitaminA, vitaminC, carbs, sodium, sugar, artSugar, fat, cost)
+  VALUES (1, 1500, 50, 100, 100, 100, 100, 275, 3400, 30, 30, 61, 10);
