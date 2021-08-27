@@ -136,7 +136,7 @@ if (isset($_POST['addSubmit'])) {
         </div>
         <div class="calc-table">
           <table>
-            <tr>
+            <tr class = "textWHITE">
               <th>Item</th>
               <th>Calories (#)</th>
               <th>Protein (g)</th>
@@ -155,7 +155,7 @@ if (isset($_POST['addSubmit'])) {
             <tr>
               <?php for($i = 0; $i < 14; $i++) echo "<td>Empty</td>"; ?>
             </tr>
-            <tr>
+            <tr class = "textWHITE">
               <th>Total</th>
               <?php for($i = 0; $i < 12; $i++) echo "<th>0</th>"; ?>
               <th></th>
