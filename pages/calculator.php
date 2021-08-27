@@ -3,7 +3,7 @@ include_once 'connector.php';
 $pullingMenuCode = "";
 $menuNumber = 0;
 $amountNeeded = 0;
-$foundItem = false;
+
 if (isset($_POST['deleteMenu'])) {
   $deleteMenuText = "DELETE FROM menus WHERE basketID =" . $_POST['menuNumber'];
   $deleteQuery = mysqli_query($conn, $deleteMenuText);
@@ -222,6 +222,7 @@ $recommendedVals = mysqli_fetch_array($pullRecommededValsQuery);
               <th>Amount Needed</th>
             </tr>
             <?php
+            $foundItem = false;
             $setColour = true;
             if ($pullingMenuCode == "") {
               echo "<tr>";
@@ -232,7 +233,6 @@ $recommendedVals = mysqli_fetch_array($pullRecommededValsQuery);
               $pullingMenuQuery = mysqli_query($conn, $pullingMenuCode);
               $row = mysqli_fetch_assoc($pullingMenuQuery);
 
-              $foundItem = false;
               for ($x = 1; $x <= 25; $x++) {
                 if ($row['itemID' . $x] != 0) {
                   $foundItem = true;
