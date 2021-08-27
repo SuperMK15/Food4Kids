@@ -296,8 +296,12 @@ $recommendedVals = mysqli_fetch_array($pullRecommededValsQuery);
               <th class="textWHITE">Recommended</th>
               <?php
               for ($i = 1; $i <= 12; $i++) echo '<th class="textWHITE">' . $recommendedVals[$i] . '</th>';
-              echo '<th></th>';
               ?>
+              <th>
+                <form method="post" action="./recommendedValueEditor.php">
+                  <input type="submit" value="Edit" class="button" name="editRecommendedVals" id="editRecommendedVals">
+                </form>
+              </th>
             </tr>
           </table>
         </div>
