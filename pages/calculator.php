@@ -48,18 +48,13 @@ if (isset($_POST['item1']) and isset($_POST['calSubmit'])) {
   $sqlCal = "SELECT * FROM items WHERE identifier ='" . $_POST['item1'] . "'";
   $resultCal = mysqli_query($conn, $sqlCal);
 }
-$tCalories = 0;
-$tProtein = 0;
-$tCalcium = 0;
-$tIron = 0;
-$tvitaminA = 0;
-$tvitaminC = 0;
-$tCarbohydrates = 0;
-$tSodium = 0;
-$tSugar = 0;
-$tArtSugar = 0;
-$tFat = 0;
-$tPrice = 0.00;
+
+
+$pullRecommededValsText = "SELECT * FROM recommendedvals WHERE valsID = 1";
+$pullRecommededValsQuery = mysqli_query($conn, $pullRecommededValsText);
+
+$totalVals = array_fill(0, 12, 0);
+$recommendedVals = mysqli_fetch_array($pullRecommededValsQuery);
 ?>
 
 <!DOCTYPE html>
@@ -227,10 +222,12 @@ $tPrice = 0.00;
               <th>Amount Needed</th>
             </tr>
             <?php
+            $setColour = true;
             if ($pullingMenuCode == "") {
               echo "<tr>";
               for($i = 0; $i < 14; $i++) echo "<td>Empty</td>";
               echo "</tr>";
+              $setColour = false;
             } else {
               $pullingMenuQuery = mysqli_query($conn, $pullingMenuCode);
               $row = mysqli_fetch_assoc($pullingMenuQuery);
@@ -261,18 +258,18 @@ $tPrice = 0.00;
                     } else {
                       echo "<td>None</td>";
                     }
-                    $tCalories = $tCalories + $itemRow['calories'];
-                    $tProtein = $tProtein + $itemRow['protein'];
-                    $tCalcium = $tCalcium + $itemRow['calcium'];
-                    $tIron = $tIron + $itemRow['iron'];
-                    $tvitaminA = $tvitaminA + $itemRow['vitaminA'];
-                    $tvitaminC = $tvitaminC + $itemRow['vitaminC'];
-                    $tCarbohydrates = $tCarbohydrates + $itemRow['carbohydrates'];
-                    $tSodium = $tSodium + $itemRow['sodium'];
-                    $tSugar = $tSugar + $itemRow['sugar'];
-                    $tArtSugar = $tArtSugar + $itemRow['artSugar'];
-                    $tFat = $tFat + $itemRow['fat'];
-                    $tPrice = $tPrice + $itemRow['price'];
+                    $totalVals[0] += $itemRow['calories'];
+                    $totalVals[1] += $itemRow['protein'];
+                    $totalVals[2] += $itemRow['calcium'];
+                    $totalVals[3] += $itemRow['iron'];
+                    $totalVals[4] += $itemRow['vitaminA'];
+                    $totalVals[5] += $itemRow['vitaminC'];
+                    $totalVals[6] += $itemRow['carbohydrates'];
+                    $totalVals[7] += $itemRow['sodium'];
+                    $totalVals[8] += $itemRow['sugar'];
+                    $totalVals[9] += $itemRow['artSugar'];
+                    $totalVals[10] += $itemRow['fat'];
+                    $totalVals[11] += $itemRow['price'];
                     echo "</tr>";
                   }
                 }
@@ -282,24 +279,16 @@ $tPrice = 0.00;
             <tr>
               <th class="textWHITE">Total</th>
               <?php
-                if ($tCalories < 1000) {
-                  echo '<th class="textRED">' . $tCalories . '</th>';
-                } else if ($tCalories > 2000) {
-                  echo '<th class="textYELLOW">' . $tCalories . '</th>';
-                } else {
-                  echo '<th class="textWHITE">' . $tCalories . '</th>';
-                }
-              echo '<th class="textWHITE">' . $tProtein . '</th>';
-              echo '<th>' . $tCalcium . '</th>';
-              echo '<th>' . $tIron . '</th>';
-              echo '<th>' . $tvitaminA . '</th>';
-              echo '<th>' . $tvitaminC . '</th>';
-              echo '<th>' . $tCarbohydrates . '</th>';
-              echo '<th>' . $tSodium . '</th>';
-              echo '<th>' . $tSugar . '</th>';
-              echo '<th>' . $tArtSugar . '</th>';
-              echo '<th>' . $tFat . '</th>';
-              echo '<th>' . $tPrice . '</th>';
+              for($i = 0; $i < 12; $i++) {
+                $lowerBound = 0.8;
+                $upperBound = 1.2;
+
+                if($i == 11) $lowerBound = -1;
+
+                if ($totalVals[$i] < ($recommendedVals[$i+1]*$lowerBound) && $setColour) echo '<th class="textRED">' . $totalVals[$i] . '</th>';
+                else if ($totalVals[$i] > ($recommendedVals[$i+1]*$upperBound) && $setColour) echo '<th class="textYELLOW">' . $totalVals[$i] . '</th>';
+                else echo '<th class="textWHITE">' . $totalVals[$i] . '</th>';
+              }
               echo '<th></th>';
               ?>
             </tr>
