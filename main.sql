@@ -112,7 +112,7 @@ INSERT INTO Items(identifier, calories, protein, calcium, iron, vitaminA, vitami
         ('Cedar Falafel Mix', 200, 8, 8, 15, 0, 0, 24, 50, 6, 0, 0, 1, 1, 1, 0, 1.67, 50),
         ('Canned Hummus & Tahini (398ml)', 29, 1, 2, 3, 0, 0, 4, 210, 1, 0, 1, 1, 1, 1, 0, 1.25, 50),
         ('Dare Chocolate Cookie (2x)', 140, 1, 1, 4, 0, 0, 19, 90, 9, 0, 7, 1, 1, 1, 0, 0.4, 50),
-        ('Campbell's Chicken Noodle', 120, 7, 2, 6, 8, 0, 15, 650, 3, 0, 3, 1, 0, 0, 1, 0.5, 50),
+        ('Campbells Chicken Noodle', 120, 7, 2, 6, 8, 0, 15, 650, 3, 0, 3, 1, 0, 0, 1, 0.5, 50),
         ('Canned Turkey (156g)', 70, 9, 2, 4, 0, 2, 0, 330, 0, 0, 4, 1, 0, 0, 1, 1.67, 50),
         ('Ozery Breakfast Round (2 pc)', 220, 9, 2, 10, 0, 0, 37, 210, 3, 0, 4, 1, 1, 1, 1, 2.2, 50),
         ('Kirkland Trail Mix', 300, 9, 6, 6, 0, 0, 26, 100, 20, 0, 18, 0, 1, 1, 0, 0.9, 50),
