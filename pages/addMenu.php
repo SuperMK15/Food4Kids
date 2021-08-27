@@ -5,44 +5,44 @@ $leftBlank = false;
 $repeatedName = false;
 
 $triedToHack = false;
-if (str_contains($_POST['newMenuName'], "'") || str_contains($_POST['newMenuName'], "\"")) {
-  $triedToHack = true;
-}
-
-if (isset($_POST['addSubmit']) && !str_contains($_POST['newMenuName'], "'") && !str_contains($_POST['newMenuName'], "\"")) {
-  $checkForRepeatText = "SELECT basketID FROM menus WHERE menuName='" . $_POST['newMenuName'] . "'";
-  $checkForRepeatQuery = mysqli_query($conn, $checkForRepeatText);
-
-  if (mysqli_num_rows($checkForRepeatQuery) != 0 || strlen(trim($_POST['newMenuName'])) == 0) {
-    if (mysqli_num_rows($checkForRepeatQuery) != 0) {
-      $repeatedName = true;
-      $repeatedNameDisplay = $_POST['newMenuName'];
-    } else if (strlen(trim($_POST['newMenuName'])) == 0) {
-      $leftBlank = true;
-    }
-
-    $items = array_fill(0, 30, "");
-    for ($i = 1; $i <= 25; $i++) {
-      $items[$i] = $_POST["item" . $i];
-    }
+if (isset($_POST['addSubmit'])) {
+  if (str_contains($_POST['newMenuName'], "'") || str_contains($_POST['newMenuName'], "\"")) {
+    $triedToHack = true;
   } else {
-    $addingMenuText = "INSERT INTO menus (menuName) VALUES ('" . $_POST['newMenuName'] . "')";
-    $addingMenuQuery = mysqli_query($conn, $addingMenuText);
-    for ($x = 1; $x <= 25; $x++) {
-      $convertTextToID = "SELECT itemID FROM items WHERE identifier='" . $_POST['item' . $x] . "'";
-      $convertQuery = mysqli_query($conn, $convertTextToID);
-      if (mysqli_num_rows($convertQuery) != 0) {
-        $convertRow = mysqli_fetch_assoc($convertQuery);
-        $id = $convertRow['itemID'];
-        $updateSelect = "UPDATE menus SET itemID" . $x . " = $id WHERE menuName = '" . $_POST['newMenuName'] . "'";
-        $updateQuery = mysqli_query($conn, $updateSelect);
-      } else {
-        $updateSelect = "UPDATE menus SET itemID" . $x . " = 0 WHERE menuName = '" . $_POST['newMenuName'] . "'";
-        $updateQuery = mysqli_query($conn, $updateSelect);
+    $checkForRepeatText = "SELECT basketID FROM menus WHERE menuName='" . $_POST['newMenuName'] . "'";
+    $checkForRepeatQuery = mysqli_query($conn, $checkForRepeatText);
+
+    if (mysqli_num_rows($checkForRepeatQuery) != 0 || strlen(trim($_POST['newMenuName'])) == 0) {
+      if (mysqli_num_rows($checkForRepeatQuery) != 0) {
+        $repeatedName = true;
+        $repeatedNameDisplay = $_POST['newMenuName'];
+      } else if (strlen(trim($_POST['newMenuName'])) == 0) {
+        $leftBlank = true;
       }
+
+      $items = array_fill(0, 30, "");
+      for ($i = 1; $i <= 25; $i++) {
+        $items[$i] = $_POST["item" . $i];
+      }
+    } else {
+      $addingMenuText = "INSERT INTO menus (menuName) VALUES ('" . $_POST['newMenuName'] . "')";
+      $addingMenuQuery = mysqli_query($conn, $addingMenuText);
+      for ($x = 1; $x <= 25; $x++) {
+        $convertTextToID = "SELECT itemID FROM items WHERE identifier='" . $_POST['item' . $x] . "'";
+        $convertQuery = mysqli_query($conn, $convertTextToID);
+        if (mysqli_num_rows($convertQuery) != 0) {
+          $convertRow = mysqli_fetch_assoc($convertQuery);
+          $id = $convertRow['itemID'];
+          $updateSelect = "UPDATE menus SET itemID" . $x . " = $id WHERE menuName = '" . $_POST['newMenuName'] . "'";
+          $updateQuery = mysqli_query($conn, $updateSelect);
+        } else {
+          $updateSelect = "UPDATE menus SET itemID" . $x . " = 0 WHERE menuName = '" . $_POST['newMenuName'] . "'";
+          $updateQuery = mysqli_query($conn, $updateSelect);
+        }
+      }
+      header("Location: ./calculator.php");
+      exit();
     }
-    header("Location: ./calculator.php");
-    exit();
   }
 }
 
@@ -101,7 +101,7 @@ $recommendedVals = mysqli_fetch_array($pullRecommededValsQuery);
                 echo "<h5>Error: The Name \"" . $repeatedNameDisplay . "\" Has Already Been Used!</h5>";
               }
 
-              if($triedToHack) {
+              if ($triedToHack) {
                 echo "<h5>Error: The Symbols ' and \" are not Allowed in Menu Names!</h5>";
               }
               ?>
