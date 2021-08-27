@@ -74,7 +74,7 @@ CREATE TABLE recommendedVals (
   artSugar DECIMAL(10, 2),
   fat DECIMAL(10, 2),
   cost DECIMAL(10, 2)
-)
+);
 
 INSERT INTO Items(identifier, calories, protein, calcium, iron, vitaminA, vitaminC, carbohydrates, sodium, sugar, artSugar, fat, containsNuts, isVegetarian, isHalal, isBaby, price, stock)
   VALUES
